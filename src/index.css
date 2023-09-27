@@ -1,0 +1,20 @@
+body{
+  background-image: url("/src/assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Esto evita que la imagen se desplace al hacer scroll */
+  background-position: center;
+  margin: 0; /* Elimina el margen por defecto del cuerpo de la página */
+  padding: 0; /* Elimina el relleno por defecto del cuerpo de la página */
+}
+
+.background-image {
+  background-image: url("/src/assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Esto evita que la imagen se desplace al hacer scroll */
+  background-position: center;
+  margin: 0; /* Elimina el margen por defecto del cuerpo de la página */
+  padding: 0; /* Elimina el relleno por defecto del cuerpo de la página */
+}
+
