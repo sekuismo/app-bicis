@@ -6,6 +6,7 @@ import Login from './Components/Login'
 import Register from './Components/Register'
 import { Route, Routes } from 'react-router-dom'
 import QrComponent from './Components/QrComponent'
+import QRReaderComponent from './Components/QrReaderComponent'
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
     <Route path='/' element={<Home/>}/>
     <Route path='/login' element={<Login/>}  />
     <Route path='/register' element={<Register/>} />
-    <Route path='/qrReader' element={<QrComponent/>}    />
+    <Route path='/qrGenerator' element={<QrComponent/>}    />
+    <Route path='/qrReader' element={<QRReaderComponent/>} />
 
     </Routes>
     {/* <Footer/> */}
