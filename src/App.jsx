@@ -7,6 +7,7 @@ import Register from './Components/Register'
 import { Route, Routes } from 'react-router-dom'
 import QrComponent from './Components/QrComponent'
 import QRReaderComponent from './Components/QrReaderComponent'
+import Dashboard from './Components/Dashboard'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
     <Route path='/register' element={<Register/>} />
     <Route path='/qrGenerator' element={<QrComponent/>}    />
     <Route path='/qrReader' element={<QRReaderComponent/>} />
+    <Route path='/dashboard' element={<Dashboard/>}    />
 
     </Routes>
     {/* <Footer/> */}
