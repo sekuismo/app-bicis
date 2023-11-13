@@ -2,7 +2,7 @@ import React from "react";
 import { createContext, useState, useEffect } from "react";
 
 function HomeUser() {
-  const biciEnEstacionamiento = true;
+  const biciEnEstacionamiento = false;
 
   const user1 = {
     nombre: "Marcianito",

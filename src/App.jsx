@@ -9,6 +9,8 @@ import QrComponent from './Components/QrComponent'
 import QRReaderComponent from './Components/QrReaderComponent'
 import Dashboard from './Components/Dashboard'
 import HomeUser from './Components/HomeUser'
+import HomeAdmin from './Components/HomeAdmin'
+import HomeGuardia from './Components/HomeGuardia'
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
     <Route path='/qrReader' element={<QRReaderComponent/>} />
     <Route path='/dashboard' element={<Dashboard/>}    /> 
     <Route path='/homeUser' element={<HomeUser/>}    /> 
+    <Route path='/homeAdmin' element={<HomeAdmin/>}    /> 
+    <Route path='/homeGuardia' element={<HomeGuardia/>}    /> 
 
     </Routes>
     {/* <Footer/> */}
