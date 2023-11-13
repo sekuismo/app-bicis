@@ -11,6 +11,7 @@ import Dashboard from './Components/Dashboard'
 import HomeUser from './Components/HomeUser'
 import HomeAdmin from './Components/HomeAdmin'
 import HomeGuardia from './Components/HomeGuardia'
+import ReservarEstacionamiento from './Components/ReservarEstacionamiento'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
     <Route path='/homeUser' element={<HomeUser/>}    /> 
     <Route path='/homeAdmin' element={<HomeAdmin/>}    /> 
     <Route path='/homeGuardia' element={<HomeGuardia/>}    /> 
+    <Route path='/reservar' element={<ReservarEstacionamiento/>}    /> 
 
     </Routes>
     {/* <Footer/> */}

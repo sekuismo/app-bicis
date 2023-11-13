@@ -34,7 +34,7 @@ function HomeAdmin() {
       }}
     >
       <div className="container-fluid">
-        <div className="row justify-content-center mt-5">
+        <div className="row justify-content-center mt-1">
           <div className="col-md-1"></div>
           <div className="col-md-5">
             <div
@@ -52,7 +52,7 @@ function HomeAdmin() {
                   : `¡Bienvenida ${admin.nombre}!`}
               </h5>
               <div
-                className="card p-2 mt-3"
+                className="card p-2 mt-3 mb-3"
                 style={{
                   minWidth: "350px",
                   maxWidth: "500px",
@@ -61,31 +61,35 @@ function HomeAdmin() {
                 }}
               >
                 <p
-                  className="text-center mb-0 mt-1"
-                  style={{ fontSize: "95%" }}
+                  className="text-center mb-0 mt-2"
+                  style={{ fontSize: "95%", fontWeight: "bold" }}
                 >
                   Módulo de administración
                 </p>
                 <div className="text-center" style={{ fontSize: "100%" }}>
                   <div
-                    className="card p-2 mb-0 mt-3"
+                    className="card p-2 mb-4 mt-3"
                     style={{ backgroundColor: "#091953", color: "white" }}
                   >
+                    <div style={{fontSize: "180%"}}>👨‍💼</div>
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4"
+                      style={{maxWidth: "250px", alignSelf: "center"}}
                     >
                       Registro de entradas y salidas
                     </button>
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4"
+                      style={{maxWidth: "250px", alignSelf: "center"}}
                     >
                       Monitoreo del estacionamiento
                     </button>
                     <button
                       type="submit"
-                      className="btn btn-primary btn-block mt-4"
+                      className="btn btn-primary btn-block mt-4 mb-4"
+                      style={{maxWidth: "250px", alignSelf: "center"}}
                     >
                       Crear cuenta de guardia
                     </button>

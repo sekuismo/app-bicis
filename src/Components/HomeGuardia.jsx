@@ -52,7 +52,7 @@ function HomeGuardia() {
                   : `¡Bienvenida ${guardia.nombre}!`}
               </h5>
               <div
-                className="card p-2 mt-3"
+                className="card p-2 mt-3 mb-2"
                 style={{
                   minWidth: "350px",
                   maxWidth: "500px",
@@ -62,33 +62,37 @@ function HomeGuardia() {
               >
                 <p
                   className="text-center mb-0 mt-1"
-                  style={{ fontSize: "95%" }}
+                  style={{ fontSize: "95%", fontWeight: "bold" }}
                 >
                   Módulo para guardias
                 </p>
                 <div className="text-center" style={{ fontSize: "100%" }}>
                   <div
-                    className="card p-2 mb-0 mt-3"
+                    className="card p-2 mb-1 mt-3"
                     style={{ backgroundColor: "#091953", color: "white" }}
                   >
+                    <div style={{fontSize: "180%"}}>💂</div>
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4"
+                      style={{width: "250px", alignSelf: "center"}}
                     >
                       Ver usuarios activos
                     </button>
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4 mb-3"
+                      style={{width: "250px", alignSelf: "center"}}
                     >
                       Revisar QR
                     </button>
                   </div>
-                  <p className="mt-3">
-                    Hay *n* cupos disponibles en el bicicletero
+                  <p className="mt-4">
+                    En este momento hay *n* cupos disponibles en el bicicletero
                   </p>
                 </div>
               </div>
+                <div style={{fontSize: "180%", alignSelf: "center"}}>🚲</div>
             </div>
           </div>
           <div className="col-md-5">

@@ -25,7 +25,7 @@ function HomeUser() {
 
   const user = user1;
 
-  const cupos = 10;
+  const cupos = 1;
 
   return (
     <div
@@ -225,7 +225,9 @@ function HomeUser() {
                         }}
                       >
                         <p style={{ fontWeight: "bold" }}>
-                          *Cupos disponibles: {cupos}
+                          {cupos > 0
+                            ? `Cupos disponibles: ${cupos}`
+                            : "No hay cupos disponibles 🙁"}
                         </p>
                         <p>
                           Última fecha de uso del estacionamiento:{" "}
@@ -248,12 +250,23 @@ function HomeUser() {
                       </div>
                     </div>
                   </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block mt-4"
-                  >
-                    Reservar cupo
-                  </button>
+                  {cupos > 0 ? (
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block mt-4"
+                    >
+                      Reservar cupo
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block mt-4"
+                      disabled
+                      style={{backgroundColor: "grey"}}
+                    >
+                      Reservar cupo
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="col-md-5">
