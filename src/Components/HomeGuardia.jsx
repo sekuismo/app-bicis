@@ -14,14 +14,10 @@ function HomeGuardia() {
     genero: "F",
   };
 
-  const entrada = {
-    fecha: "12/11/2023",
-    guardia: "Juanito",
-  };
-
-  const guardia = guardia2;
-
+  const guardia = guardia1;
   const cupos = 10;
+  const dia = "jueves";
+  const personas = 44;
 
   return (
     <div
@@ -34,7 +30,7 @@ function HomeGuardia() {
       }}
     >
       <div className="container-fluid">
-        <div className="row justify-content-center mt-5">
+        <div className="row justify-content-center mt-0">
           <div className="col-md-1"></div>
           <div className="col-md-5">
             <div
@@ -52,12 +48,15 @@ function HomeGuardia() {
                   : `¡Bienvenida ${guardia.nombre}!`}
               </h5>
               <div
-                className="card p-2 mt-3 mb-2"
+                className="card p-2 mt-3 mb-0"
                 style={{
                   minWidth: "350px",
                   maxWidth: "500px",
                   backgroundColor: "#2A2248",
                   color: "white",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
                 }}
               >
                 <p
@@ -66,7 +65,7 @@ function HomeGuardia() {
                 >
                   Módulo para guardias
                 </p>
-                <div className="text-center" style={{ fontSize: "100%" }}>
+                <div className="text-center" style={{ fontSize: "100%", maxWidth: "500px" }}>
                   <div
                     className="card p-2 mb-1 mt-3"
                     style={{ backgroundColor: "#091953", color: "white" }}
@@ -88,11 +87,11 @@ function HomeGuardia() {
                     </button>
                   </div>
                   <p className="mt-4">
-                    En este momento hay *n* cupos disponibles en el bicicletero
+                    En este momento hay {cupos} cupos disponibles en el bicicletero
                   </p>
                 </div>
               </div>
-                <div style={{fontSize: "180%", alignSelf: "center"}}>🚲</div>
+                <div style={{fontSize: "180%", alignSelf: "center", marginBottom: "5px"}}>🚲</div>
             </div>
           </div>
           <div className="col-md-5">
@@ -118,8 +117,8 @@ function HomeGuardia() {
                 }}
               >
                 <p className="text-left mb-2 mt-0">
-                  ¡Esta semana *n* personas usaron el estacionamiento! El día de
-                  mayor uso fue el miércoles.
+                  ¡Esta semana {personas} personas usaron el estacionamiento! El día de
+                  mayor uso fue el {dia}.
                 </p>
                 <div
                   className="card p-2 mb-0 mt-3"

@@ -2,7 +2,7 @@ import React from "react";
 import { createContext, useState, useEffect } from "react";
 
 function HomeAdmin() {
-  const biciEnEstacionamiento = true;
+  const biciEnEstacionamiento = false;
 
   const admin1 = {
     nombre: "Juan Díaz",
@@ -61,14 +61,14 @@ function HomeAdmin() {
                 }}
               >
                 <p
-                  className="text-center mb-0 mt-2"
+                  className="text-center mb-1 mt-3"
                   style={{ fontSize: "95%", fontWeight: "bold" }}
                 >
                   Módulo de administración
                 </p>
                 <div className="text-center" style={{ fontSize: "100%" }}>
                   <div
-                    className="card p-2 mb-4 mt-3"
+                    className="card p-2 mb-2 mt-3"
                     style={{ backgroundColor: "#091953", color: "white" }}
                   >
                     <div style={{fontSize: "180%"}}>👨‍💼</div>

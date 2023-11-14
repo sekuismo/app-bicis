@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom'
 import QrComponent from './Components/QrComponent'
 import QRReaderComponent from './Components/QrReaderComponent'
 import Dashboard from './Components/Dashboard'
+import Dashboard2 from './Components/Dashboard2'
 import HomeUser from './Components/HomeUser'
 import HomeAdmin from './Components/HomeAdmin'
 import HomeGuardia from './Components/HomeGuardia'
@@ -29,6 +30,7 @@ function App() {
     <Route path='/qrGenerator' element={<QrComponent/>}    />
     <Route path='/qrReader' element={<QRReaderComponent/>} />
     <Route path='/dashboard' element={<Dashboard/>}    /> 
+    <Route path='/dashboard2' element={<Dashboard2/>}    /> 
     <Route path='/homeUser' element={<HomeUser/>}    /> 
     <Route path='/homeAdmin' element={<HomeAdmin/>}    /> 
     <Route path='/homeGuardia' element={<HomeGuardia/>}    /> 
