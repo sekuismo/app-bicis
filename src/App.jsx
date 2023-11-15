@@ -13,6 +13,7 @@ import HomeUser from './Components/HomeUser'
 import HomeAdmin from './Components/HomeAdmin'
 import HomeGuardia from './Components/HomeGuardia'
 import ReservarEstacionamiento from './Components/ReservarEstacionamiento'
+import RegisterGuardia from './Components/RegisterGuardia'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
     <Route path='/homeAdmin' element={<HomeAdmin/>}    /> 
     <Route path='/homeGuardia' element={<HomeGuardia/>}    /> 
     <Route path='/reservar' element={<ReservarEstacionamiento/>}    /> 
+    <Route path='/registerGuardia' element={<RegisterGuardia/>} />
 
     </Routes>
     {/* <Footer/> */}

@@ -414,8 +414,7 @@ function HomeUser() {
                             fontSize: "110%",
                           }}
                         >
-                          Tienes un cupo reservado para el día *día* a las
-                          *hora*
+                        Presiona el botón de abajo para generar tu código QR
                         </p>
                       </div>
                       <div style={{fontSize: "160%", textAlign: "center", marginTop: "15px"}}>😄</div>

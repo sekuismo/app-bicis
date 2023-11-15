@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Register() {
+function RegisterGuardia() {
   return (
     <div>
 <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100">
   <div className="card p-4 bg-light w-100" style={{ maxWidth: '400px' }}>
-    <h3 className="text-center mb-4">Registro</h3>
+    <h3 className="text-center mb-4">Crear cuenta de guardia</h3>
     <form>
       <div className="mb-3">
         <label htmlFor="email" className="form-label">
@@ -55,17 +55,8 @@ function Register() {
           required
         />
       </div>
-      <div className="mb-3">
-        <label className="form-label">Tipo de usuario:</label>
-        <select className="form-select" required>
-          <option value="" disabled>Selecciona una opción</option>
-          <option value="estudiante">Estudiante</option>
-          <option value="docente">Docente</option>
-          <option value="funcionario">Funcionario</option>
-        </select>
-      </div>
       <button type="submit" className="btn btn-primary btn-block">
-        Registrarse
+        Crear cuenta
       </button>
     </form>
   </div>
@@ -75,4 +66,4 @@ function Register() {
   )
 }
 
-export default Register
+export default RegisterGuardia

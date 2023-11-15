@@ -11,10 +11,8 @@ function ReservarEstacionamiento() {
   const biciEnEstacionamiento = false;
 
   const hoursOptions = [
-    { value: "09:00", label: "09:00 AM" },
-    { value: "12:00", label: "12:00 PM" },
-    { value: "15:00", label: "03:00 PM" },
-    // Add more options as needed
+    { value: "Mañana (07:00 a 15:00)", label: "Mañana" },
+    { value: "Tarde (15:00 a 23:00)", label: "Tarde" },
   ];
 
   const handleDateChange = (date) => {
@@ -95,6 +93,7 @@ function ReservarEstacionamiento() {
                       color: "white",
                       fontSize: "90%",
                       maxHeight: "300px",
+                      textAlign: "center",
                     }}
                   >
                     <p
@@ -105,18 +104,29 @@ function ReservarEstacionamiento() {
                         fontSize: "110%",
                       }}
                     >
-                      Fecha:{" "}
+                      <div style={{ marginBottom: "15px" }}>Fecha: </div>
                       <DatePicker
                         selected={selectedDate}
                         onChange={handleDateChange}
                         dateFormat="dd/MM/yyyy"
-                      />{" "} <hr />
-                      Hora:{" "}
-                      <Select
-                        options={hoursOptions}
-                        value={selectedHour}
-                        onChange={handleHourChange}
-                      />
+                      />{" "}
+                      <hr />
+                      <div style={{ marginBottom: "15px" }}>Hora: </div>
+                      <div
+                        style={{
+                          maxWidth: "200px",
+                          margin: "0 auto",
+                          marginBottom: "5px",
+                        }}
+                      >
+                        <div style ={{ color: "black"}}>
+                          <Select
+                            options={hoursOptions}
+                            value={selectedHour}
+                            onChange={handleHourChange}
+                          />
+                        </div>
+                      </div>
                     </p>
                   </div>
                   <div></div>

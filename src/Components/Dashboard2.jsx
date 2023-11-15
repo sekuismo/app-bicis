@@ -7,17 +7,11 @@ function Dashboard2() {
   useEffect(() => {
     // Simulamos datos de ejemplo ya que la API aún no está lista
     const mockData = [
-      { user: 'Juan Pérez', entryTime: '2023-01-01T10:00:00Z', exitTime: '2023-01-01T13:30:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'María Gómez', entryTime: '2023-01-01T11:30:00Z', exitTime: '2023-01-01T14:45:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'Pedro Rodriguez', entryTime: '2023-01-01T09:15:00Z', exitTime: '2023-01-01T12:45:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Ana Martínez', entryTime: '2023-01-01T14:00:00Z', exitTime: '2023-01-01T17:30:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'José Sánchez', entryTime: '2023-01-01T13:45:00Z', exitTime: '2023-01-01T17:00:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Laura Fernández', entryTime: '2023-01-01T12:30:00Z', exitTime: '2023-01-01T15:45:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'Carlos López', entryTime: '2023-01-01T15:15:00Z', exitTime: '2023-01-01T18:30:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Sofía Ramírez', entryTime: '2023-01-01T09:30:00Z', exitTime: '2023-01-01T12:15:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'Alejandro Torres', entryTime: '2023-01-01T14:45:00Z', exitTime: '2023-01-01T17:45:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Carmen González', entryTime: '2023-01-01T13:00:00Z', exitTime: '2023-01-01T16:00:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      // Agrega más datos según sea necesario
+      { user: 'Juan Pérez', entryTime: '2023-01-01T10:00:00Z', assignedEntryGuard: 'Guardia1'},
+      { user: 'María Gómez', entryTime: '2023-01-01T11:30:00Z', assignedEntryGuard: 'Guardia2'},
+      { user: 'Pedro Rodriguez', entryTime: '2023-01-01T09:15:00Z', assignedEntryGuard: 'Guardia1'},
+      { user: 'Ana Martínez', entryTime: '2023-01-01T14:00:00Z', assignedEntryGuard: 'Guardia2'},
+      { user: 'José Sánchez', entryTime: '2023-01-01T13:45:00Z', assignedEntryGuard: 'Guardia1', },
     ];
 
     setParkingData(mockData);
@@ -30,20 +24,16 @@ function Dashboard2() {
 
   return (
     <div className="container">
-      <h3 className="display-3 text-white text-center ">Registro del estacionamiento</h3>
+      <h3 className="mt-4 display-3 text-white text-center ">Monitoreo del estacionamiento</h3>
 
-      {/* Muestra la cantidad de estacionamientos disponibles (simulado) */}
-      <p className='text-white text-end ' >Estacionamientos disponibles: {10 - parkingData.length}</p>
+      <h6 className="text-white text-center mt-4 mb-5">Los siguientes usuarios están ocupando el estacionamiento actualmente:</h6>
 
-      {/* Tabla para mostrar los detalles */}
-      <table className="table table-bordered table-striped">
+      <table className="table table-bordered table-striped mt-4 mb-4">
         <thead>
           <tr>
             <th>Usuario</th>
             <th>Hora de entrada</th>
-            <th>Hora de salida</th>
             <th>Guardia entrada</th>
-            <th>Guardia salida</th>
           </tr>
         </thead>
         <tbody>
@@ -51,13 +41,12 @@ function Dashboard2() {
             <tr key={index}>
               <td>{entry.user}</td>
               <td>{formatTime(entry.entryTime)}</td>
-              <td>{formatTime(entry.exitTime)}</td>
               <td>{entry.assignedEntryGuard}</td>
-              <td>{entry.assignedExitGuard}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <p className='text-white text-end' style={{fontWeight: "bold"}}>Cupos disponibles: {10 - parkingData.length}</p>
     </div>
   );
 }

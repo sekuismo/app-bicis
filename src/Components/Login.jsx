@@ -3,7 +3,7 @@ import React from 'react'
 function Login() {
   return (
     <div>
-      <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-dark">
+      <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 bg-light" style={{ minWidth: '350px' }}>
         <h3 className="text-center mb-4">Iniciar Sesión</h3>
         <form>
