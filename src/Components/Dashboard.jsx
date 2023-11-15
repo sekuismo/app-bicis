@@ -47,6 +47,7 @@ function Dashboard() {
           </tr>
         </thead>
         <tbody>
+          {/* AQUÍ ESTAMOS SIMULANDO UN MAP A LO CONSUMIDO DE LA API */}
           {parkingData.map((entry, index) => (
             <tr key={index}>
               <td>{entry.user}</td>
