@@ -30,13 +30,13 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <h3 className="display-3 text-white text-center ">Registro del estacionamiento</h3>
+      <h3 className="display-3 text-white text-center mt-3 ">Registro del estacionamiento</h3>
 
       {/* Muestra la cantidad de estacionamientos disponibles (simulado) */}
       <p className='text-white text-end ' >Estacionamientos disponibles: {10 - parkingData.length}</p>
 
       {/* Tabla para mostrar los detalles */}
-      <table className="table table-bordered table-striped">
+      <table className="table table-bordered table-striped mt-2">
         <thead>
           <tr>
             <th>Usuario</th>

@@ -447,12 +447,14 @@ function HomeUser() {
                       </div>
                     </div>
                   </div>
+                  <a href="/qrGenerator" style={{textAlign: "center"}}>
                   <button
                     type="submit"
                     className="btn btn-primary btn-block mt-4"
                   >
                     Generar QR de entrada
                   </button>
+                  </a>
                 </div>
               </div>
               <div className="col-md-5">

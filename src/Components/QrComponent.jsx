@@ -41,8 +41,10 @@ function QrComponent() {
   };
 
   const qrCodeStyle = {
-    width: 400, // Ajusta el ancho según tus necesidades
-    height: 400, // Ajusta la altura según tus necesidades
+    width: 300, // Ajusta el ancho según tus necesidades
+    height: 300,
+    marginTop: "10px", // Ajusta la altura según tus necesidades
+    marginBottom: "10px" // Ajusta la altura según tus necesidades
   };
 
   return (
@@ -50,13 +52,13 @@ function QrComponent() {
       <div className="container mx-auto my-auto ">
         <div className="row mx-auto my-auto">
           <div className="col text-center">
-            <h1 className="display-3 text-center text-white m-2">Guarda tu bicicleta 🚴‍♀️🚴‍♂️ </h1>
+            <h1 className="display-3 text-center text-white m-2 mt-4">Guarda tu bicicleta 🚴‍♀️🚴‍♂️ </h1>
           </div>
         </div>
         <div className="row">
           {buttonVisible && (
             <div className="col text-center">
-              <button className="btn btn-primary" onClick={generateQRCode}>
+              <button className="btn btn-primary" style={{marginTop: "100px", fontSize: "150%"}} onClick={generateQRCode}>
                 Generar QR Code
               </button>
             </div>

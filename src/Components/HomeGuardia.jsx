@@ -71,6 +71,7 @@ function HomeGuardia() {
                     style={{ backgroundColor: "#091953", color: "white" }}
                   >
                     <div style={{fontSize: "180%"}}>💂</div>
+                    <a href="/dashboard2">
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4"
@@ -78,6 +79,8 @@ function HomeGuardia() {
                     >
                       Ver usuarios activos
                     </button>
+                    </a>
+                    <a href="/qrReader">
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4 mb-3"
@@ -85,6 +88,7 @@ function HomeGuardia() {
                     >
                       Revisar QR
                     </button>
+                    </a>
                   </div>
                   <p className="mt-4">
                     En este momento hay {cupos} cupos disponibles en el bicicletero

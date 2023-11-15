@@ -72,6 +72,7 @@ function HomeAdmin() {
                     style={{ backgroundColor: "#091953", color: "white" }}
                   >
                     <div style={{fontSize: "180%"}}>👨‍💼</div>
+                    <a href="/dashboard">
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4"
@@ -79,6 +80,8 @@ function HomeAdmin() {
                     >
                       Registro de entradas y salidas
                     </button>
+                    </a>
+                    <a href="/dashboard2">
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4"
@@ -86,6 +89,8 @@ function HomeAdmin() {
                     >
                       Monitoreo del estacionamiento
                     </button>
+                    </a>
+                    <a href="/registerGuardia">
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4 mb-4"
@@ -93,6 +98,7 @@ function HomeAdmin() {
                     >
                       Crear cuenta de guardia
                     </button>
+                    </a>
                   </div>
                 </div>
               </div>
