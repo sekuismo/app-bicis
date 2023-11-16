@@ -39,6 +39,8 @@ function App() {
     <Route path='/registerGuardia' element={<RegisterGuardia/>} />
 
     </Routes>
+
+    <QRReaderComponent/>
     {/* <Footer/> */}
     
     </ div>
