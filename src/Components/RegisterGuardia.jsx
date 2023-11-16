@@ -6,7 +6,14 @@ function RegisterGuardia() {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Dirección de correo electrónico inválida').required('Este campo es obligatorio'),
     fullName: Yup.string().required('Este campo es obligatorio'),
-    password: Yup.string().required('Este campo es obligatorio'),
+    password: Yup.string()
+      .required('Este campo es obligatorio')
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
+      .max(16, 'La contraseña no puede tener más de 16 caracteres')
+      .matches(
+        /^(?=.*[A-Z])(?=.*\d)/,
+        'La contraseña debe contener al menos una letra mayúscula y un número'
+      ),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
       .required('Este campo es obligatorio'),
@@ -21,7 +28,7 @@ function RegisterGuardia() {
     },
     validationSchema,
     onSubmit: (values) => {
-      //ACÁ TENEMOS QUE HACER LA PETICIÓN POST AL BACK END PARA QUE FUNCIONE
+      // Aquí deberías hacer la petición POST al backend para registrar al usuario
       console.log('Formulario de guardia', values);
     },
   });

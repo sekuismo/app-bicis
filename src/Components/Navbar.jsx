@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function Navbar() {
   //Guarderemos por mientras en un useState   estudiante -  administrador  - guardia
-  const [userType, setUserType] = useState('administrador');
+  const [userType, setUserType] = useState('desconectado');
 
   // AQUÍ TENEMOS QUE CONSUMIR LA API QUE SERÁ ALMACENADA EN EL ESTADO GLOBAL PARA SETEAR EL TIPO DE USUARIO Y HACER EL RENDERIZADO CONDICIONAL
   const handleChangeUserType = (newUserType) => {

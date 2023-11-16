@@ -3,6 +3,22 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 function Register() {
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Ingresa un correo electrónico válido').required('Campo requerido'),
+    fullName: Yup.string().required('Campo requerido'),
+    password: Yup.string()
+      .required('Campo requerido')
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
+      .max(16, 'La contraseña no puede tener más de 16 caracteres')
+      .matches(
+        /^(?=.*[A-Z])(?=.*\d)/,
+        'La contraseña debe contener al menos una letra mayúscula y un número'
+      ),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
+      .required('Campo requerido'),
+  });
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -10,16 +26,9 @@ function Register() {
       password: '',
       confirmPassword: '',
     },
-    validationSchema: Yup.object({
-      email: Yup.string().email('Ingresa un correo electrónico válido').required('Campo requerido'),
-      fullName: Yup.string().required('Campo requerido'),
-      password: Yup.string().required('Campo requerido'),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
-        .required('Campo requerido'),
-    }),
+    validationSchema,
     onSubmit: (values) => {
-      // AQUÍ TENEMOS QUE HACER LA PETICIÓN POST AL BACK END A TRAVÉS DE FORMIK
+      // AQUÍ DEBERÍAS HACER LA PETICIÓN POST AL BACKEND PARA REGISTRAR AL USUARIO
       console.log(values);
     },
   });
@@ -81,7 +90,9 @@ function Register() {
               </label>
               <input
                 type="password"
-                className={`form-control ${formik.touched.confirmPassword && formik.errors.confirmPassword ? 'is-invalid' : ''}`}
+                className={`form-control ${
+                  formik.touched.confirmPassword && formik.errors.confirmPassword ? 'is-invalid' : ''
+                }`}
                 id="confirmPassword"
                 placeholder="Confirma tu contraseña"
                 {...formik.getFieldProps('confirmPassword')}

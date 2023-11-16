@@ -30,7 +30,10 @@ function QrComponent() {
     // Esta función genera el código QR para almacenarlo
     const userData = {
       userId: 'Esteban Muñoz',
-      token: SHA256(Math.random().toString()).toString().substring(0, 10), // Genera un token simple
+      token: SHA256(Math.random().toString()).toString().substring(0, 10),
+      email:'estebanmunozrojas@gmail.com',
+      bicicleta:'oxford moonstone 1100',
+      rut:'19.239.872-K' // Genera un token simple
     };
     console.log(userData.token)
     setUserName(userData.userId)
@@ -41,10 +44,8 @@ function QrComponent() {
   };
 
   const qrCodeStyle = {
-    width: 300, // Ajusta el ancho según tus necesidades
+    width: 300,
     height: 300,
-    marginTop: "10px", // Ajusta la altura según tus necesidades
-    marginBottom: "10px" // Ajusta la altura según tus necesidades
   };
 
   return (
