@@ -1,7 +1,25 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../Context";
+useNavigate
 
 function HomeGuardia() {
+  const { setUserType } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('user');
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUserType(foundUser.type);
+      // Aquí puedes realizar acciones adicionales dependiendo del tipo de usuario
+      // Por ejemplo, cargar datos específicos del usuario o configurar permisos
+    } else {
+      // Si no hay un usuario logueado, redirigir a la página de inicio de sesión
+      navigate('/login');
+    }
+  }, [navigate, setUserType]);
   const biciEnEstacionamiento = true;
 
   const guardia1 = {

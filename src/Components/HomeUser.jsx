@@ -1,7 +1,23 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../Context";
 function HomeUser() {
+  const { setUserType } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUserType(foundUser.type);
+      // Aquí puedes realizar acciones adicionales dependiendo del tipo de usuario
+      // Por ejemplo, cargar datos específicos del usuario o configurar permisos
+    } else {
+      // Si no hay un usuario logueado, redirigir a la página de inicio de sesión
+      navigate("/login");
+    }
+  }, [navigate, setUserType]);
   const biciEnEstacionamiento = false;
   const reserva = true;
 
@@ -132,7 +148,8 @@ function HomeUser() {
                   }}
                 >
                   <p className="text-left mb-2 mt-0 mb-1">
-                    ¡Esta semana usaste el estacionamiento durante un total de {user.horas} horas!
+                    ¡Esta semana usaste el estacionamiento durante un total de{" "}
+                    {user.horas} horas!
                   </p>
                   <div
                     className="card p-2 mb-0 mt-3"
@@ -414,10 +431,18 @@ function HomeUser() {
                             fontSize: "110%",
                           }}
                         >
-                        Presiona el botón de abajo para generar tu código QR
+                          Presiona el botón de abajo para generar tu código QR
                         </p>
                       </div>
-                      <div style={{fontSize: "160%", textAlign: "center", marginTop: "15px"}}>😄</div>
+                      <div
+                        style={{
+                          fontSize: "160%",
+                          textAlign: "center",
+                          marginTop: "15px",
+                        }}
+                      >
+                        😄
+                      </div>
                       <div
                         className="card p-4 mb-0 mt-4"
                         style={{
@@ -447,13 +472,13 @@ function HomeUser() {
                       </div>
                     </div>
                   </div>
-                  <a href="/qrGenerator" style={{textAlign: "center"}}>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block mt-4"
-                  >
-                    Generar QR de entrada
-                  </button>
+                  <a href="/qrGenerator" style={{ textAlign: "center" }}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block mt-4"
+                    >
+                      Generar QR de entrada
+                    </button>
                   </a>
                 </div>
               </div>

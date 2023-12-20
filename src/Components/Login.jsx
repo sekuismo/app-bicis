@@ -1,44 +1,62 @@
-import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { useUser } from '../Context';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState,useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useUser } from "../Context";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { setUserType } = useUser();
-  const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verificar si el usuario ya está logueado
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUserType(foundUser.type);
+      navigateToUserPage(foundUser.type);
+    }
+  }, [setUserType, navigate]);
+
+  const navigateToUserPage = (userType) => {
+    if (userType === "estudiante") {
+      navigate("/homeUser");
+    } else if (userType === "administrador") {
+      navigate("/homeAdmin");
+    } else if (userType === "guardia") {
+      navigate("/homeGuardia");
+    }
+  };
+
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required('El usuario es obligatorio'),
-    password: Yup.string().required('La contraseña es obligatoria'),
+    username: Yup.string().required("El usuario es obligatorio"),
+    password: Yup.string().required("La contraseña es obligatoria"),
   });
 
   const handleLogin = async (values, { setSubmitting }) => {
     const { username, password } = values;
 
     try {
-      // Realizar la petición HTTP al servidor utilizando Axios
-      const response = await axios.get('http://localhost:3000/users');
+      const response = await axios.get("http://localhost:3000/users");
       const data = response.data;
 
-      // Verificar si el usuario y contraseña son válidos en la respuesta del servidor
-      const user = data.find((user) => user.username === username && user.password === password);
+      const user = data.find(
+        (u) => u.username === username && u.password === password
+      );
 
       if (user) {
-        // Usuario válido, actualizar el tipo de usuario a 'estudiante'
-        setUserType('estudiante');
-        console.log('funcionó')
-        navigate('/homeUser');
-        setErrorMessage('');
+        localStorage.setItem("user", JSON.stringify(user));
+        setUserType(user.type);
+        navigateToUserPage(user.type);
+        setErrorMessage("");
       } else {
-        // Usuario o contraseña inválidos, mostrar mensaje de error
-        setErrorMessage('Usuario o contraseña inválidos');
+        setErrorMessage("Usuario o contraseña inválidos");
       }
     } catch (error) {
-      console.error('Error al realizar la petición:', error);
-      setErrorMessage('Error en la petición');
+      console.error("Error al realizar la petición:", error);
+      setErrorMessage("Error en la petición");
     }
 
     setSubmitting(false);
@@ -47,12 +65,12 @@ function Login() {
   return (
     <div>
       <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
-        <div className="card p-4 bg-light" style={{ minWidth: '350px' }}>
+        <div className="card p-4 bg-light" style={{ minWidth: "350px" }}>
           <h3 className="text-center mb-4">Iniciar Sesión</h3>
           <Formik
             initialValues={{
-              username: '',
-              password: '',
+              username: "",
+              password: "",
             }}
             validationSchema={validationSchema}
             onSubmit={handleLogin}
@@ -69,7 +87,11 @@ function Login() {
                     className="form-control"
                     placeholder="Ingresa tu nombre de usuario"
                   />
-                  <ErrorMessage name="username" component="div" className="text-danger" />
+                  <ErrorMessage
+                    name="username"
+                    component="div"
+                    className="text-danger"
+                  />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">
@@ -81,7 +103,11 @@ function Login() {
                     className="form-control"
                     placeholder="Ingresa tu contraseña"
                   />
-                  <ErrorMessage name="password" component="div" className="text-danger" />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="text-danger"
+                  />
                 </div>
                 <div className="mb-3 form-check">
                   <Field
