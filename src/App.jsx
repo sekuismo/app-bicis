@@ -15,6 +15,7 @@ import HomeGuardia from "./Components/HomeGuardia";
 import ReservarEstacionamiento from "./Components/ReservarEstacionamiento";
 import RegisterGuardia from "./Components/RegisterGuardia";
 import { UserProvider } from "./Context";
+import RequireAuth from './Components/RequireAuth'; // Importa tu componente RequireAuth
 
 function App() {
   return (
@@ -25,15 +26,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/qrGenerator" element={<QrComponent />} />
-          <Route path="/qrReader" element={<QRReaderComponent />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard2" element={<Dashboard2 />} />
-          <Route path="/homeUser" element={<HomeUser />} />
-          <Route path="/homeAdmin" element={<HomeAdmin />} />
-          <Route path="/homeGuardia" element={<HomeGuardia />} />
-          <Route path="/reservar" element={<ReservarEstacionamiento />} />
-          <Route path="/registerGuardia" element={<RegisterGuardia />} />
+          <Route path="/qrGenerator" element={<QrComponent allowedUsers={['estudiante','administrador']} />} />
+          <Route path="/qrReader" element={ <RequireAuth><QRReaderComponent allowedUsers={['guardia']} /></RequireAuth>} />
+          <Route path="/dashboard" element={<RequireAuth><Dashboard allowedUsers={['administrador']} /></RequireAuth>} />
+          <Route path="/dashboard2" element={<RequireAuth><Dashboard2 /></RequireAuth>} />
+          <Route path="/homeUser" element={<RequireAuth><HomeUser /></RequireAuth>} />
+          <Route path="/homeAdmin" element={<RequireAuth><HomeAdmin /></RequireAuth>} />
+          <Route path="/homeGuardia" element={<RequireAuth allowedUsers={['guardia','administrador']}   ><HomeGuardia/></RequireAuth>} />
+          <Route path="/reservar" element={<RequireAuth><ReservarEstacionamiento/></RequireAuth>} />
+          {/* PROTEGER ESTA RUTA EXCEPTO AL ADMIN */}
+          <Route path="/registerGuardia" element={<RequireAuth allowedUsers={['administrador']}><RegisterGuardia/> </RequireAuth>} />  
+          
         </Routes>
         {/* <Footer/> */}
       </div>
