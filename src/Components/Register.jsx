@@ -1,10 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 function Register() {
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Ingresa un correo electrónico válido').required('Campo requerido'),
+    email: Yup.string()
+      .email('Ingresa un correo electrónico válido')
+      .matches(/^[a-zA-Z0-9._-]+@inacapmail\.cl$/, 'Solo se permite registrar con correo Inacap')
+      .required('Campo requerido'),
     fullName: Yup.string().required('Campo requerido'),
     password: Yup.string()
       .required('Campo requerido')
@@ -25,11 +29,22 @@ function Register() {
       fullName: '',
       password: '',
       confirmPassword: '',
+      type: 'estudiante', // Campo oculto para el tipo de usuario
     },
     validationSchema,
-    onSubmit: (values) => {
-      // AQUÍ DEBERÍAS HACER LA PETICIÓN POST AL BACKEND PARA REGISTRAR AL USUARIO
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const userData = {
+          email: values.email,
+          fullName: values.fullName,
+          password: values.password,
+          type: 'estudiante' // Asegurándonos de que el tipo de usuario sea siempre 'estudiante'
+        };
+        await axios.post('http://localhost:3000/users', userData);
+        console.log('Usuario estudiante registrado con éxito');
+      } catch (error) {
+        console.error('Error al registrar el usuario:', error);
+      }
     },
   });
 
@@ -39,10 +54,9 @@ function Register() {
         <div className="card p-4 bg-light w-100" style={{ maxWidth: '400px' }}>
           <h3 className="text-center mb-4">Registro</h3>
           <form onSubmit={formik.handleSubmit}>
+            {/* Campos del formulario */}
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email:
-              </label>
+              <label htmlFor="email" className="form-label">Email:</label>
               <input
                 type="email"
                 className={`form-control ${formik.touched.email && formik.errors.email ? 'is-invalid' : ''}`}
@@ -50,14 +64,13 @@ function Register() {
                 placeholder="Ingresa tu dirección de correo electrónico"
                 {...formik.getFieldProps('email')}
               />
-              {formik.touched.email && formik.errors.email ? (
+              {formik.touched.email && formik.errors.email && (
                 <div className="invalid-feedback">{formik.errors.email}</div>
-              ) : null}
+              )}
             </div>
+
             <div className="mb-3">
-              <label htmlFor="fullName" className="form-label">
-                Nombre completo:
-              </label>
+              <label htmlFor="fullName" className="form-label">Nombre completo:</label>
               <input
                 type="text"
                 className={`form-control ${formik.touched.fullName && formik.errors.fullName ? 'is-invalid' : ''}`}
@@ -65,14 +78,13 @@ function Register() {
                 placeholder="Ingresa tu nombre completo"
                 {...formik.getFieldProps('fullName')}
               />
-              {formik.touched.fullName && formik.errors.fullName ? (
+              {formik.touched.fullName && formik.errors.fullName && (
                 <div className="invalid-feedback">{formik.errors.fullName}</div>
-              ) : null}
+              )}
             </div>
+
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Contraseña:
-              </label>
+              <label htmlFor="password" className="form-label">Contraseña:</label>
               <input
                 type="password"
                 className={`form-control ${formik.touched.password && formik.errors.password ? 'is-invalid' : ''}`}
@@ -80,14 +92,13 @@ function Register() {
                 placeholder="Ingresa tu contraseña"
                 {...formik.getFieldProps('password')}
               />
-              {formik.touched.password && formik.errors.password ? (
+              {formik.touched.password && formik.errors.password && (
                 <div className="invalid-feedback">{formik.errors.password}</div>
-              ) : null}
+              )}
             </div>
+
             <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">
-                Confirmar contraseña:
-              </label>
+              <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña:</label>
               <input
                 type="password"
                 className={`form-control ${
@@ -97,14 +108,12 @@ function Register() {
                 placeholder="Confirma tu contraseña"
                 {...formik.getFieldProps('confirmPassword')}
               />
-              {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+              {formik.touched.confirmPassword && formik.errors.confirmPassword && (
                 <div className="invalid-feedback">{formik.errors.confirmPassword}</div>
-              ) : null}
+              )}
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block">
-              Registrarse
-            </button>
+            <button type="submit" className="btn btn-primary btn-block">Registrarse</button>
           </form>
         </div>
       </div>
