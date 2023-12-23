@@ -1,47 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { useUser } from '../Context';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useUser } from "../Context";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { setUserType } = useUser();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     // Verificar si el usuario ya está logueado
-    const loggedInUser = localStorage.getItem('user');
+    const loggedInUser = localStorage.getItem("user");
+
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
-      setUserType(foundUser.type);
-      navigateToUserPage(foundUser.type);
+      setUserType(foundUser.type); //setea el tipo de usuario
+      navigateToUserPage(foundUser.type); //navega al Navbar según el tipo de usuario
     }
   }, [setUserType, navigate]);
 
   const navigateToUserPage = (userType) => {
-    if (userType === 'estudiante') {
-      navigate('/homeUser');
-    } else if (userType === 'administrador') {
-      navigate('/homeAdmin');
-    } else if (userType === 'guardia') {
-      navigate('/homeGuardia');
+    if (userType === "estudiante") {
+      navigate("/homeUser");
+    } else if (userType === "administrador") {
+      navigate("/homeAdmin");
+    } else if (userType === "guardia") {
+      navigate("/homeGuardia");
     }
   };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email('Debe ser un correo electrónico válido')
-      .required('El correo electrónico es obligatorio'),
-    password: Yup.string().required('La contraseña es obligatoria'),
+      .email("Debe ser un correo electrónico válido")
+      .required("El correo electrónico es obligatorio"),
+    password: Yup.string().required("La contraseña es obligatoria"),
   });
 
   const handleLogin = async (values, { setSubmitting }) => {
     const { email, password } = values;
 
     try {
-      const response = await axios.get('http://localhost:3000/users');
+      const response = await axios.get("http://localhost:3000/users");
       const data = response.data;
 
       const user = data.find(
@@ -49,21 +50,17 @@ function Login() {
       );
 
       if (user) {
-        const userInfo = {
-          id: user.id,
-          email: user.email,
-          type: user.type
-        };
-        localStorage.setItem('user', JSON.stringify(userInfo));
+        // Almacena toda la información del usuario
+        localStorage.setItem("user", JSON.stringify(user));
         setUserType(user.type);
         navigateToUserPage(user.type);
-        setErrorMessage('');
+        setErrorMessage("");
       } else {
-        setErrorMessage('Correo electrónico o contraseña inválidos');
+        setErrorMessage("Correo electrónico o contraseña inválidos");
       }
     } catch (error) {
-      console.error('Error al realizar la petición:', error);
-      setErrorMessage('Error en la petición');
+      console.error("Error al realizar la petición:", error);
+      setErrorMessage("Error en la petición");
     }
 
     setSubmitting(false);
@@ -71,12 +68,12 @@ function Login() {
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4 bg-light" style={{ minWidth: '350px' }}>
+      <div className="card p-4 bg-light" style={{ minWidth: "350px" }}>
         <h3 className="text-center mb-4">Iniciar Sesión</h3>
         <Formik
           initialValues={{
-            email: '',
-            password: '',
+            email: "",
+            password: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleLogin}
