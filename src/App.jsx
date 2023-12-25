@@ -27,7 +27,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/qrGenerator" element={<QrComponent allowedUsers={['estudiante','administrador']} />} />
-          <Route path="/qrReader" element={ <RequireAuth><QRReaderComponent allowedUsers={['guardia']} /></RequireAuth>} />
+          {/* <Route path="/qrReader" element={ <RequireAuth><QRReaderComponent allowedUsers={['guardia']} /></RequireAuth>} /> */}
+          <Route path="/qrReader" element={ <QRReaderComponent /> } />
           <Route path="/dashboard" element={<RequireAuth><Dashboard allowedUsers={['administrador']} /></RequireAuth>} />
           <Route path="/dashboard2" element={<RequireAuth><Dashboard2 /></RequireAuth>} />
           <Route path="/homeUser" element={<RequireAuth><HomeUser /></RequireAuth>} />
