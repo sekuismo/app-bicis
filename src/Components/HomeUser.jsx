@@ -24,29 +24,18 @@ function HomeUser() {
   }, [navigate]);
 
   const submitBikeForm = (bikeData) => {
-    if (bike) {
-      axios.put(`http://localhost:3000/users/${user.id}`, {
-          ...user,
-          bicicleta: bikeData,
-        })
-        .then((response) => {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          setBike(response.data.bicicleta);
-          setEditingBike(false);
-        })
-        .catch((error) => console.error(error));
-    } else {
-      axios.post("http://localhost:3000/users", {
-          ...user,
-          bicicleta: bikeData,
-        })
-        .then((response) => {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          setBike(response.data.bicicleta);
-          setEditingBike(false);
-        })
-        .catch((error) => console.error(error));
-    }
+    // Actualizar el registro completo del usuario con la nueva información de la bicicleta
+    axios
+      .put(`http://localhost:3000/users/${user.id}`, {
+        ...user, // Mantener la información existente del usuario
+        bicicleta: bikeData, // Actualizar o agregar la información de la bicicleta
+      })
+      .then((response) => {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        setBike(response.data.bicicleta);
+        setEditingBike(false);
+      })
+      .catch((error) => console.error(error));
   };
 
   const handleEditBike = () => {
@@ -57,12 +46,14 @@ function HomeUser() {
     <div className="container">
       <div className="row">
         <div className="col">
-          <h1 className="display-4 text-white">Hola {user ? user.fullName : ''}</h1>
+          <h1 className="display-4 text-white">
+            Hola {user ? user.fullName : ""}
+          </h1>
         </div>
       </div>
       {user && !bike && !editingBike && (
         <BikeForm
-          bikeData={{ marca: "", modelo: "", color: "", accesorios: "" }}
+          bikeData={{ brand_name: "", model: "", color: "", accessories: "" }}
           submitBikeForm={submitBikeForm}
         />
       )}
@@ -76,24 +67,22 @@ function HomeUser() {
                 <p className="card-text">Modelo: {bike.model}</p>
                 <p className="card-text">Color: {bike.color}</p>
                 <p className="card-text">Accesorios: {bike.accessories}</p>
-                <button onClick={handleEditBike} className="btn btn-primary">Modificar Bicicleta</button>
+                <button onClick={handleEditBike} className="btn btn-primary">
+                  Modificar Bicicleta
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
       {editingBike && (
-        <BikeForm
-          bikeData={bike}
-          submitBikeForm={submitBikeForm}
-        />
+        <BikeForm bikeData={bike} submitBikeForm={submitBikeForm} />
       )}
     </div>
   );
 }
 
 export default HomeUser;
-
 
 // import React from "react";
 // import { createContext, useState, useEffect } from "react";
