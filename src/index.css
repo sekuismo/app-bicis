@@ -4,6 +4,7 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed; /* Esto evita que la imagen se desplace al hacer scroll */
   background-position: center;
+  position: relative;
   margin: 0; /* Elimina el margen por defecto del cuerpo de la página */
   padding: 0; /* Elimina el relleno por defecto del cuerpo de la página */
 }
@@ -16,4 +17,16 @@ body{
   background-position: center;
   margin: 0; /* Elimina el margen por defecto del cuerpo de la página */
   padding: 0; /* Elimina el relleno por defecto del cuerpo de la página */
+}
+
+#root {
+  /* Asegúrate de que haya suficiente margen inferior para que el contenido no se superponga con el footer */
+  margin-bottom: 50px; /* Puedes ajustar este valor según sea necesario */
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }

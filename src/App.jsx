@@ -16,6 +16,8 @@ import ReservarEstacionamiento from "./Components/ReservarEstacionamiento";
 import RegisterGuardia from "./Components/RegisterGuardia";
 import { UserProvider } from "./Context";
 import RequireAuth from './Components/RequireAuth'; // Importa tu componente RequireAuth
+import Terminos from "./Components/Terminos";
+import Manual from "./Components/Manual";
 
 function App() {
   return (
@@ -37,9 +39,10 @@ function App() {
           <Route path="/reservar" element={<RequireAuth><ReservarEstacionamiento/></RequireAuth>} />
           {/* PROTEGER ESTA RUTA EXCEPTO AL ADMIN */}
           <Route path="/registerGuardia" element={<RequireAuth allowedUsers={['administrador']}><RegisterGuardia/> </RequireAuth>} />  
-          
+          <Route path="/terminos" element={<Terminos />} />          
+          <Route path="/manual" element={<Manual />} />          
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
       </div>
     </UserProvider>
   );
