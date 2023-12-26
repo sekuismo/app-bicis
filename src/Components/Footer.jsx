@@ -1,22 +1,31 @@
-import React from 'react'
+import React from "react";
 
 function Footer() {
   return (
-    <div>
-        <footer  className="bg-light p-4">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-6">
-              <p className="mb-0">Marcial, Felipe y Esteban</p>
-            </div>
-            <div className="col-md-6 text-md-end">
-              <a href="#">Términos y condiciones</a>
-            </div>
-          </div>
+    <footer class="footer bg-dark py-3 fixed-bottom left-0 w-full">
+      <div class="container mx-auto px-3 text-center">
+        <div class="text-white text-sm flex flex-wrap justify-center items-center">
+          <a
+            class="link-primary px-2 py-2"
+            href="/terminos"
+          >
+            Términos y condiciones
+          </a>{" "}
+          <span class="text-white" >|</span>{" "}
+          <a
+            className="link-primary px-2 py-2"
+            href="/manual"
+          >
+            Manual de usuario
+          </a>{" "}
+          <span class="text-white" >| </span>{" "}
+          <span class="text-white font-semibold px-2 py-2">
+            Desarrollado por Esteban Muñoz, Felipe Jimenez y Marcial Díaz.
+          </span>
         </div>
-      </footer>
-    </div>
-  )
+      </div>
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;

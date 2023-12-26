@@ -20,9 +20,6 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="fixed-bottom fixed-right m-4 p-3 ">
-        <i className="bi bi-qr-code" style={{ fontSize: "2rem" }}></i>
-      </div>
     </div>
   );
 }
