@@ -30,7 +30,7 @@ function App() {
           {/* <Route path="/qrReader" element={ <RequireAuth><QRReaderComponent allowedUsers={['guardia']} /></RequireAuth>} /> */}
           <Route path="/qrReader" element={ <QRReaderComponent /> } />
           <Route path="/dashboard" element={<RequireAuth><Dashboard allowedUsers={['administrador']} /></RequireAuth>} />
-          <Route path="/dashboard2" element={<RequireAuth><Dashboard2 /></RequireAuth>} />
+          <Route path="/dashboardUsers" element={<RequireAuth><Dashboard2 /></RequireAuth>} />
           <Route path="/homeUser" element={<RequireAuth><HomeUser /></RequireAuth>} />
           <Route path="/homeAdmin" element={<RequireAuth><HomeAdmin /></RequireAuth>} />
           <Route path="/homeGuardia" element={<RequireAuth allowedUsers={['guardia','administrador']}   ><HomeGuardia/></RequireAuth>} />

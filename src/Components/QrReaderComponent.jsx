@@ -1,68 +1,62 @@
-import { Html5QrcodeScanner } from "html5-qrcode";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
 function QRReaderComponent() {
   const [scanResult, setScanResult] = useState(null);
-  const qrValidator = async () => {
-    try {
-      const response = await axios.post('URL_DEL_BACKEND', scanResult);
+  const [user, setUser] = useState("Juan Díaz"); // Asumiendo que 'user' pueda cambiar.
 
-      // Manejar la respuesta del backend aquí
+  const qrValidator = async (qrData) => {
+    try {
+      const response = await axios.post('http://localhost:3000/control', qrData);
       console.log('Respuesta del backend:', response.data);
+      alert('Datos del QR enviados con éxito');
     } catch (error) {
-      // Manejar errores aquí
       console.error('Error al enviar datos al backend:', error);
-      console.log(`Los datos del qr  ${scanResult} han sido enviados al menos unu `)
-      alert(`${scanResult}  funcionando ` )
+      alert('Error al enviar datos del QR');
     }
   };
+
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
-      qrbox: {
-        width: 250,
-        height: 250,
-      },
+      qrbox: { width: 250, height: 250 },
       fps: 10,
     });
 
-
-
-    scanner.render(success, error);
-
-    function success(result) {
+    const onScanSuccess = (decodedText, decodedResult) => {
       scanner.clear();
-      setScanResult(result);
-      qrValidator()
+      try {
+        const qrData = JSON.parse(decodedText);
+        setScanResult(qrData);
+        qrValidator(qrData);
+      } catch (error) {
+        console.error('Error al procesar los datos del QR:', error);
+        alert('Error al procesar los datos del QR');
+      }
+    };
 
-    }
-    function error(err) {
-      console.warn(err);
-    }
+    const onScanError = (error) => {
+      console.warn('Error de escaneo:', error);
+    };
+
+    scanner.render(onScanSuccess, onScanError);
+    return () => scanner.clear();
   }, []);
-  let user = "Juan Díaz"
-
-  // enviar datos al backend
-
 
   return (
     <div>
-
-      <h1 className="text-white text-center display-3 mb-5 mt-4">Bienvenido/a {user}  </h1> 
+      <h1 className="text-white text-center display-3 mb-5 mt-4">Bienvenido/a {user}</h1>
       {scanResult ? (
         <div>
-          Success: <a href={"https://" + scanResult}>{scanResult}</a>{" "}
+          <p>Resultado del Escaneo: {JSON.stringify(scanResult)}</p>
         </div>
       ) : (
         <div className="container">
           <div className="row">
             <div className="col">
               <div id="reader"></div>
-
             </div>
-
           </div>
-
         </div>
       )}
     </div>
