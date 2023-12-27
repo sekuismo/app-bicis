@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useUser } from "../Context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../Context";
 
 function Login() {
   const { setUserType } = useUser();
@@ -13,21 +13,26 @@ function Login() {
   useEffect(() => {
     // Verificar si el usuario ya está logueado
     const loggedInUser = localStorage.getItem("user");
-
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
-      setUserType(foundUser.type); //setea el tipo de usuario
-      navigateToUserPage(foundUser.type); //navega al Navbar según el tipo de usuario
+      setUserType(foundUser.data.profile); // Ajustar según cómo quieras manejar el tipo de usuario
+      navigateToUserPage(foundUser.data.profile); // Asegúrate de que esta función maneje los tipos correctamente
     }
   }, [setUserType, navigate]);
 
   const navigateToUserPage = (userType) => {
-    if (userType === "estudiante") {
-      navigate("/homeUser");
-    } else if (userType === "administrador") {
-      navigate("/homeAdmin");
-    } else if (userType === "guardia") {
-      navigate("/homeGuardia");
+    switch (userType) {
+      case "Administrador":
+        navigate("/homeAdmin");
+        break;
+      case "Estudiante":
+        navigate("/homeUser");
+        break;
+      case "Guardia":
+        navigate("/homeGuardia");
+        break;
+      default:
+        navigate("/"); // Ruta por defecto si el tipo de usuario no coincide
     }
   };
 
@@ -40,29 +45,25 @@ function Login() {
 
   const handleLogin = async (values, { setSubmitting }) => {
     const { email, password } = values;
-
     try {
-      const response = await axios.get("http://localhost:3000/users");
-      const data = response.data;
+      const response = await axios.post("http://107.22.28.154:3333/auth/login", {
+        email,
+        password
+      });
+      const userData = response.data;
 
-      const user = data.find(
-        (u) => u.email === email && u.password === password
-      );
-
-      if (user) {
-        // Almacena toda la información del usuario
-        localStorage.setItem("user", JSON.stringify(user));
-        setUserType(user.type);
-        navigateToUserPage(user.type);
+      if (userData && userData.status === 0) {
+        localStorage.setItem("user", JSON.stringify(userData));
+        setUserType(userData.data.profile);
+        navigateToUserPage(userData.data.profile);
         setErrorMessage("");
       } else {
-        setErrorMessage("Correo electrónico o contraseña inválidos");
+        setErrorMessage(userData.message || "Error al iniciar sesión");
       }
     } catch (error) {
       console.error("Error al realizar la petición:", error);
       setErrorMessage("Error en la petición");
     }
-
     setSubmitting(false);
   };
 
