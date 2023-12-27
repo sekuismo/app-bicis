@@ -13,13 +13,13 @@ function Footer() {
           </a>{" "}
           <span className="text-white" >|</span>{" "}
           <a
-            className="link-primary px-2 py-2"
+            className="link-primary px-1 py-1"
             href="/manual"
           >
             Manual de usuario
           </a>{" "}
-          <span className="text-white" >| </span>{" "}
-          <span className="text-white font-semibold px-2 py-2">
+          <span className="text-white" id="footerInfo" >| </span>{" "}
+          <span className="text-white font-semibold px-1 py-1" id="footerInfo">
             Desarrollado por Esteban Muñoz, Felipe Jimenez y Marcial Díaz.
           </span>
         </div>

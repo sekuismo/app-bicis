@@ -25,13 +25,6 @@ function HomeAdmin() {
 
   return (
     <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        marginTop: "-50px",
-      }}
     >
       <div className="container-fluid">
         <div className="row justify-content-center mt-1">
@@ -40,8 +33,6 @@ function HomeAdmin() {
             <div
               className="card p-2 mt-5"
               style={{
-                minWidth: "350px",
-                maxWidth: "500px",
                 backgroundColor: "#2B296B",
                 color: "white",
               }}
@@ -52,8 +43,6 @@ function HomeAdmin() {
               <div
                 className="card p-2 mt-3 mb-3"
                 style={{
-                  minWidth: "350px",
-                  maxWidth: "500px",
                   backgroundColor: "#2A2248",
                   color: "white",
                 }}
@@ -104,10 +93,8 @@ function HomeAdmin() {
           </div>
           <div className="col-md-5">
             <div
-              className="card p-4 mt-5"
+              className="card p-4 mt-5 mb-5"
               style={{
-                minWidth: "350px",
-                maxWidth: "500px",
                 backgroundColor: "#2B296B",
                 color: "white",
               }}
@@ -118,14 +105,12 @@ function HomeAdmin() {
               <div
                 className="card p-3 mt-3"
                 style={{
-                  minWidth: "350px",
-                  maxWidth: "500px",
                   backgroundColor: "#2A2248",
                   color: "white",
                 }}
               >
                 <p className="text-left mb-2 mt-0">
-                  ¡Esta semana *n* personas usaron el estacionamiento! El día de mayor uso fue el miércoles.
+                  ¡Esta semana 21 personas usaron el estacionamiento! El día de mayor uso fue el miércoles.
                 </p>
                 <div
                   className="card p-2 mb-0 mt-3"

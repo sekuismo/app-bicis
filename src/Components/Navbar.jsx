@@ -83,7 +83,7 @@ function Navbar() {
                 </>
               )}
 
-              {userType === "guardia" && (
+              {userType === "Guardia" && (
                 <>
                   <li className="nav-item">
                     <a className="nav-link" href="/homeGuardia">
@@ -103,16 +103,6 @@ function Navbar() {
                   <li className="nav-item">
                     <a className="nav-link" href="/homeAdmin">
                       Panel de Administrador
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="dashboard">
-                      Registro
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/qrGenerator">
-                      Estacionar
                     </a>
                   </li>
                   <li className="nav-item">

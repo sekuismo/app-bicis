@@ -53,7 +53,7 @@ function QrComponent() {
     <div className="container mx-auto my-auto">
       <div className="row mx-auto my-auto">
         <div className="col text-center">
-          <h1 className="display-3 text-center text-white m-2 mt-4">
+          <h1 className="display-5 text-center text-white mb-4 mt-5">
             Guarda tu bicicleta 🚴‍♀️🚴‍♂️
           </h1>
         </div>
