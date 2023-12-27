@@ -80,7 +80,11 @@ body{
     font-size: 130%;
    }
 
-   #tuBici, #modificar {
+   #tuBici{
+    
+   }
+
+   #modificar {
     font-size: 100%;
    }
 }

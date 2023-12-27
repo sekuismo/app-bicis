@@ -37,7 +37,7 @@ function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              {userType === "estudiante" && (
+              {userType === "Estudiante" && (
                 <>
                   <li className="nav-item">
                     <a className="nav-link" href="/homeUser">
@@ -57,7 +57,7 @@ function Navbar() {
                 </>
               )}
 
-              {userType === "guardia" && (
+              {userType === "Guardia" && (
                 <>
                   <li className="nav-item">
                     <a className="nav-link" href="/homeGuardia">
@@ -72,21 +72,11 @@ function Navbar() {
                 </>
               )}
 
-              {userType === "administrador" && (
+              {userType === "Administrador" && (
                 <>
                   <li className="nav-item">
                     <a className="nav-link" href="/homeAdmin">
                       Panel de Administrador
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="dashboard">
-                      Registro
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/qrGenerator">
-                      Estacionar
                     </a>
                   </li>
                   <li className="nav-item">
@@ -97,7 +87,7 @@ function Navbar() {
                 </>
               )}
 
-              {!["estudiante", "guardia", "administrador"].includes(
+              {!["Estudiante", "Guardia", "Administrador"].includes(
                 userType
               ) && (
                 <>
