@@ -1,31 +1,53 @@
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 function Dashboard() {
   const [parkingData, setParkingData] = useState([]);
+  const [parkingSlots, setParkingSlots] = useState(0);
 
   // Aquí deberías hacer la llamada a tu API para obtener los datos
   useEffect(() => {
     // Simulamos datos de ejemplo ya que la API aún no está lista
-    const mockData = [
-      { user: 'Juan Pérez', entryTime: '2023-01-01T10:00:00Z', exitTime: '2023-01-01T13:30:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'María Gómez', entryTime: '2023-01-01T11:30:00Z', exitTime: '2023-01-01T14:45:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'Pedro Rodriguez', entryTime: '2023-01-01T09:15:00Z', exitTime: '2023-01-01T12:45:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Ana Martínez', entryTime: '2023-01-01T14:00:00Z', exitTime: '2023-01-01T17:30:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'José Sánchez', entryTime: '2023-01-01T13:45:00Z', exitTime: '2023-01-01T17:00:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Laura Fernández', entryTime: '2023-01-01T12:30:00Z', exitTime: '2023-01-01T15:45:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'Carlos López', entryTime: '2023-01-01T15:15:00Z', exitTime: '2023-01-01T18:30:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Sofía Ramírez', entryTime: '2023-01-01T09:30:00Z', exitTime: '2023-01-01T12:15:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      { user: 'Alejandro Torres', entryTime: '2023-01-01T14:45:00Z', exitTime: '2023-01-01T17:45:00Z', assignedEntryGuard: 'Guardia1', assignedExitGuard: 'Guardia2' },
-      { user: 'Carmen González', entryTime: '2023-01-01T13:00:00Z', exitTime: '2023-01-01T16:00:00Z', assignedEntryGuard: 'Guardia2', assignedExitGuard: 'Guardia1' },
-      // Agrega más datos según sea necesario
-    ];
 
-    setParkingData(mockData);
+    const getData = async () => {
+      const response = await axios.get("https://54.92.163.60:3333/control/");
+      const responseParking = await axios.get("https://54.92.163.60:3333/parking-slot/1");
+
+      const { data, status } = response;
+
+      if (responseParking?.status === 200){
+        if(responseParking?.data?.status === 0 && responseParking?.data?.data !== undefined ){
+          const availableSlots = responseParking?.data?.data?.availableSlots ?? 0;
+          setParkingSlots(availableSlots);
+        }
+      }
+
+      if (status === 200) {
+        if (data.data.length > 0) {
+          const sanitizedData = data.data.map((element) => {
+            return {
+              user: element?.owner?.fullName,
+              bike: `${element?.bike?.brand} ${element?.bike?.model} `,
+              color: element?.bike?.color,
+              assignedGuard: element?.guardControl?.fullName,
+              inDate: element?.inDate,
+              outDate: element?.outDate,
+            };
+          });
+          setParkingData(sanitizedData);
+        }
+      }
+    }
+
+    getData();
   }, []);
 
   const formatTime = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleTimeString();
+    if (timestamp){
+      const date = new Date(timestamp);
+      return date.toLocaleString();
+    }
+    return 'Sin salida registrada';
   };
 
   return (
@@ -33,17 +55,18 @@ function Dashboard() {
       <h3 className="display-3 text-white text-center mt-3 ">Registro del estacionamiento</h3>
 
       {/* Muestra la cantidad de estacionamientos disponibles (simulado) */}
-      <p className='text-white text-end ' >Estacionamientos disponibles: {10 - parkingData.length}</p>
+      <p className='text-white text-end ' >Estacionamientos disponibles: {parkingSlots}</p>
 
       {/* Tabla para mostrar los detalles */}
       <table className="table table-bordered table-striped mt-2">
         <thead>
           <tr>
             <th>Usuario</th>
+            <th>Bicicleta</th>
+            <th>Color</th>
             <th>Hora de entrada</th>
             <th>Hora de salida</th>
-            <th>Guardia entrada</th>
-            <th>Guardia salida</th>
+            <th>Guardia control</th>
           </tr>
         </thead>
         <tbody>
@@ -51,10 +74,11 @@ function Dashboard() {
           {parkingData.map((entry, index) => (
             <tr key={index}>
               <td>{entry.user}</td>
-              <td>{formatTime(entry.entryTime)}</td>
-              <td>{formatTime(entry.exitTime)}</td>
-              <td>{entry.assignedEntryGuard}</td>
-              <td>{entry.assignedExitGuard}</td>
+              <td>{entry.bike}</td>
+              <td>{entry.color}</td>
+              <td>{formatTime(entry.inDate)}</td>
+              <td>{formatTime(entry.outDate)}</td>
+              <td>{entry.assignedGuard}</td>
             </tr>
           ))}
         </tbody>

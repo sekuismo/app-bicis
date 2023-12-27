@@ -30,3 +30,61 @@ body{
   left: 0;
   width: 100%;
 }
+
+#whiteBike {
+  max-width: 50%;
+  margin-top: 60px;
+  margin-bottom: 70px;
+ }
+
+ #generarQR {
+  font-size: 150%;
+ }
+
+@media only screen and (max-width: 400px) {
+  #footerInfo {
+   display: none;
+  }
+  #regCard{
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+   #bikeCard {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -25px;
+    font-size: 80%;
+   }
+
+   #whiteBike {
+    max-width: 50%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+   }
+
+   #guarda {
+    font-size: 180%;
+   }
+
+   #generarQR {
+    font-size: 100%;
+   }
+
+   #userWelcome {
+    font-size: 150%;
+    margin-bottom: -30px;
+   }
+
+   #panel {
+    font-size: 130%;
+   }
+
+   #tuBici{
+    
+   }
+
+   #modificar {
+    font-size: 100%;
+   }
+}

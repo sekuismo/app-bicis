@@ -31,6 +31,9 @@ function HomeUser() {
     if (bike) {
       bikeData.id = bike.id;
       method = 'put';
+    } // En caso contrario creamos una nueva bicicleta con el id del usuario
+    else {
+      bikeData.personId = user.person.id;
     }
 
     axios[method](url, bikeData)
@@ -52,31 +55,31 @@ function HomeUser() {
   };
 
   return (
-    <div className="container">
+    <div className="container text-center">
       <div className="row">
         <div className="col">
-          <h1 className="display-4 text-white">
+          <h1 className="display-4 text-white mt-5 mb-3">
             Hola {user ? user.person.name : ""}
           </h1>
         </div>
       </div>
       {(!bike || editingBike) && (
         <BikeForm
-          bikeData={bike || { brandName: "", model: "", color: "", accesories: "" }}
+          bikeData={bike || { brandName: "", model: "", color: "", accesories: ""}}
           submitBikeForm={submitBikeForm}
         />
       )}
       {bike && !editingBike && (
         <div className="row my-4">
-          <div className="col-md-3 col-sm-12">
+          <div className="col-md-3 col-sm-12 mx-auto">
             <div className="card bg-dark text-white">
               <div className="card-body">
-                <h3 className="card-title">Tu bici 🚲</h3>
+                <h3 className="card-title mb-3">Tu bici 🚲</h3>
                 <p className="card-text">Marca: {bike.brandName}</p>
                 <p className="card-text">Modelo: {bike.model}</p>
                 <p className="card-text">Color: {bike.color}</p>
                 <p className="card-text">Accesorios: {bike.accesories}</p>
-                <button onClick={handleEditBike} className="btn btn-primary">
+                <button onClick={handleEditBike} className="btn btn-primary mt-3">
                   Modificar Bicicleta
                 </button>
               </div>

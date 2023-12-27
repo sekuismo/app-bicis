@@ -10,6 +10,7 @@ const BikeFormSchema = Yup.object().shape({
 });
 
 function BikeForm({ bikeData, submitBikeForm }) {
+
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 bg-light" style={{ minWidth: '350px' }}>

@@ -1,0 +1,71 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "password": "password1",
+      "type": "estudiante",
+      "email": "correo1@inacapmail.cl",
+      "bicicleta": {
+        "color": "Rojo",
+        "marca": "Trek",
+        "modelo": "Marlin 7"
+      }
+    },
+    {
+      "id": 2,
+      "password": "password2",
+      "type": "administrador",
+      "email": "correo2@inacapmail.cl",
+      "bicicleta": {
+        "color": "Azul",
+        "marca": "Giant",
+        "modelo": "Talon 1"
+      }
+    },
+    {
+      "id": 3,
+      "password": "password3",
+      "type": "guardia",
+      "email": "correo3@inacapmail.cl",
+      "bicicleta": {
+        "color": "Negro",
+        "marca": "Specialized",
+        "modelo": "Rockhopper Expert"
+      }
+    },
+    {
+      "id": 4,
+      "password": "admin",
+      "type": "guardia",
+      "email": "correo4@inacapmail.cl",
+      "bicicleta": {
+        "color": "Verde",
+        "marca": "Cannondale",
+        "modelo": "Trail 5"
+      }
+    },
+    {
+      "id": 5,
+      "email": "loquendo@inacapmail.cl",
+      "fullName": "juanito perez lorca",
+      "password": "Admin123",
+      "type": "estudiante",
+      "bicicleta": {
+        "color": "Azul",
+        "marca": "Trek",
+        "modelo": "Trail 3"
+      }
+    },
+    {
+      "id": 6,
+      "password": "Holahola96",
+      "type": "estudiante",
+      "email": "marcial.diaz03@inacapmail.cl",
+      "bicicleta": {
+        "color": "Rojo",
+        "marca": "Cannondale",
+        "modelo": "Trail 6"
+      }
+    }
+  ]
+}
