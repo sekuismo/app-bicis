@@ -5,12 +5,15 @@ import { useUser } from "../Context";
 
 function HomeAdmin() {
   const { setUserType } = useUser();
+  const [admin, setAdmin] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
+      
+      setAdmin(foundUser?.data);
       setUserType(foundUser.type);
       // Aquí puedes realizar acciones adicionales dependiendo del tipo de usuario
       // Por ejemplo, cargar datos específicos del usuario o configurar permisos
@@ -19,26 +22,6 @@ function HomeAdmin() {
       navigate('/login');
     }
   }, [navigate, setUserType]);
-  const biciEnEstacionamiento = false;
-
-  const admin1 = {
-    nombre: "Juan Díaz",
-    genero: "M",
-  };
-
-  const admin2 = {
-    nombre: "Fidelisa Flores",
-    genero: "F",
-  };
-
-  const entrada = {
-    fecha: "12/11/2023",
-    guardia: "Juanito",
-  };
-
-  const admin = admin2;
-
-  const cupos = 10;
 
   return (
     <div
@@ -64,9 +47,7 @@ function HomeAdmin() {
               }}
             >
               <h5 className="text-center mb-2 mt-3">
-                {admin.genero === "M"
-                  ? `¡Bienvenido ${admin.nombre}!`
-                  : `¡Bienvenida ${admin.nombre}!`}
+                ¡Bienvenido {admin.fullName}!
               </h5>
               <div
                 className="card p-2 mt-3 mb-3"
