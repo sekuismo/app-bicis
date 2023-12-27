@@ -84,6 +84,15 @@ function HomeUser() {
                 </button>
               </div>
             </div>
+            <a href="/qrGenerator">
+              <button
+                type="submit"
+                className="btn btn-primary btn-block mt-4"
+                style={{maxWidth: "250px", alignSelf: "center"}}
+              >
+                Generar QR
+              </button>
+            </a>
           </div>
         </div>
       )}

@@ -83,7 +83,7 @@ function HomeGuardia() {
                     style={{ backgroundColor: "#091953", color: "white" }}
                   >
                     <div style={{fontSize: "180%"}}>💂</div>
-                    <a href="/dashboardUsers">
+                    <a href="/dashboard2">
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mt-4"
