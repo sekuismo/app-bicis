@@ -20,7 +20,7 @@ function QRReaderComponent() {
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
-      facingMode: 'environment',
+      facingMode: 'user',
       qrbox: { width: 250, height: 250 },
       fps: 10,
     });
