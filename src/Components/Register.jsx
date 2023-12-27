@@ -44,10 +44,13 @@ function Register() {
         "Solo se permite registrar con correo Inacap"
       )
       .required("Campo requerido"),
-    fullName: Yup.string().required("Campo requerido"),
+    name: Yup.string().required("Campo requerido"),
+    lastName: Yup.string().required("Campo requerido"),
     rut: Yup.string()
       .required("Campo requerido")
-      .test("es-valido", "RUT no válido", (value) => validarRUT(value)),
+      .test("es-valido", "RUT no válido", validarRUT),
+    birthDate: Yup.string().required("Campo requerido"),
+    phone: Yup.string().required("Campo requerido"),
     password: Yup.string()
       .required("Campo requerido")
       .min(8, "La contraseña debe tener al menos 8 caracteres")
@@ -64,23 +67,30 @@ function Register() {
   const formik = useFormik({
     initialValues: {
       email: "",
-      fullName: "",
+      name: "",
+      lastName: "",
       rut: "",
+      birthDate: "",
+      phone: "",
       password: "",
       confirmPassword: "",
-      type: "estudiante", // Campo oculto para el tipo de usuario
     },
     validationSchema,
     onSubmit: async (values) => {
       try {
         const userData = {
-          email: values.email,
-          fullName: values.fullName,
+          name: values.name,
+          lastName: values.lastName,
           rut: values.rut,
-          password: values.password,
-          type: "estudiante", // Asegurándonos de que el tipo de usuario sea siempre 'estudiante'
+          birthDate: values.birthDate,
+          email: values.email,
+          phone: values.phone,
+          passwrd: values.password,
+          profileId: 3,
+          status: true,
         };
-        await axios.post("http://localhost:3000/users", userData);
+
+        await axios.post("http://107.22.28.154:3333/person-user/", userData);
         console.log("Usuario estudiante registrado con éxito");
         navigate("/login");
       } catch (error) {
@@ -90,119 +100,168 @@ function Register() {
   });
 
   return (
-    <div>
-      <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100">
-        <div className="card p-4 bg-light w-100" style={{ maxWidth: "400px" }}>
-          <h3 className="text-center mb-4">Registro</h3>
-          <form onSubmit={formik.handleSubmit}>
-            {/* Campos del formulario */}
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email:
-              </label>
-              <input
-                type="email"
-                className={`form-control ${
-                  formik.touched.email && formik.errors.email
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="email"
-                placeholder="Ingresa tu dirección de correo electrónico"
-                {...formik.getFieldProps("email")}
-              />
-              {formik.touched.email && formik.errors.email && (
-                <div className="invalid-feedback">{formik.errors.email}</div>
-              )}
-            </div>
+    <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+      <div className="card p-4 bg-light w-100" style={{ maxWidth: "400px" }}>
+        <h3 className="text-center mb-4">Registro</h3>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email:
+            </label>
+            <input
+              type="email"
+              className={`form-control ${
+                formik.touched.email && formik.errors.email ? "is-invalid" : ""
+              }`}
+              id="email"
+              placeholder="Ingresa tu dirección de correo electrónico"
+              {...formik.getFieldProps("email")}
+            />
+            {formik.touched.email && formik.errors.email && (
+              <div className="invalid-feedback">{formik.errors.email}</div>
+            )}
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="fullName" className="form-label">
-                Nombre completo:
-              </label>
-              <input
-                type="text"
-                className={`form-control ${
-                  formik.touched.fullName && formik.errors.fullName
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="fullName"
-                placeholder="Ingresa tu nombre completo"
-                {...formik.getFieldProps("fullName")}
-              />
-              {formik.touched.fullName && formik.errors.fullName && (
-                <div className="invalid-feedback">{formik.errors.fullName}</div>
-              )}
-            </div>
-            {/* Campo para el RUT */}
-            <div className="mb-3">
-              <label htmlFor="rut" className="form-label">
-                RUT:
-              </label>
-              <input
-                type="text"
-                className={`form-control ${
-                  formik.touched.rut && formik.errors.rut ? "is-invalid" : ""
-                }`}
-                id="rut"
-                placeholder="Ingresa tu RUT"
-                {...formik.getFieldProps("rut")}
-              />
-              {formik.touched.rut && formik.errors.rut && (
-                <div className="invalid-feedback">{formik.errors.rut}</div>
-              )}
-            </div>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Nombre:
+            </label>
+            <input
+              type="text"
+              className={`form-control ${
+                formik.touched.name && formik.errors.name ? "is-invalid" : ""
+              }`}
+              id="name"
+              placeholder="Ingresa tu nombre"
+              {...formik.getFieldProps("name")}
+            />
+            {formik.touched.name && formik.errors.name && (
+              <div className="invalid-feedback">{formik.errors.name}</div>
+            )}
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Contraseña:
-              </label>
-              <input
-                type="password"
-                className={`form-control ${
-                  formik.touched.password && formik.errors.password
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="password"
-                placeholder="Ingresa tu contraseña"
-                {...formik.getFieldProps("password")}
-              />
-              {formik.touched.password && formik.errors.password && (
-                <div className="invalid-feedback">{formik.errors.password}</div>
-              )}
-            </div>
+          <div className="mb-3">
+            <label htmlFor="lastName" className="form-label">
+              Apellido:
+            </label>
+            <input
+              type="text"
+              className={`form-control ${
+                formik.touched.lastName && formik.errors.lastName
+                  ? "is-invalid"
+                  : ""
+              }`}
+              id="lastName"
+              placeholder="Ingresa tu apellido"
+              {...formik.getFieldProps("lastName")}
+            />
+            {formik.touched.lastName && formik.errors.lastName && (
+              <div className="invalid-feedback">{formik.errors.lastName}</div>
+            )}
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">
-                Confirmar contraseña:
-              </label>
-              <input
-                type="password"
-                className={`form-control ${
-                  formik.touched.confirmPassword &&
-                  formik.errors.confirmPassword
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="confirmPassword"
-                placeholder="Confirma tu contraseña"
-                {...formik.getFieldProps("confirmPassword")}
-              />
-              {formik.touched.confirmPassword &&
-                formik.errors.confirmPassword && (
-                  <div className="invalid-feedback">
-                    {formik.errors.confirmPassword}
-                  </div>
-                )}
-            </div>
+          <div className="mb-3">
+            <label htmlFor="rut" className="form-label">
+              RUT:
+            </label>
+            <input
+              type="text"
+              className={`form-control ${
+                formik.touched.rut && formik.errors.rut ? "is-invalid" : ""
+              }`}
+              id="rut"
+              placeholder="Ingresa tu RUT"
+              {...formik.getFieldProps("rut")}
+            />
+            {formik.touched.rut && formik.errors.rut && (
+              <div className="invalid-feedback">{formik.errors.rut}</div>
+            )}
+          </div>
 
-            <button type="submit" className="btn btn-primary btn-block">
-              Registrarse
-            </button>
-          </form>
-        </div>
+          <div className="mb-3">
+            <label htmlFor="birthDate" className="form-label">
+              Fecha de nacimiento:
+            </label>
+            <input
+              type="text"
+              className={`form-control ${
+                formik.touched.birthDate && formik.errors.birthDate
+                  ? "is-invalid"
+                  : ""
+              }`}
+              id="birthDate"
+              placeholder="DD/MM/AAAA"
+              {...formik.getFieldProps("birthDate")}
+            />
+            {formik.touched.birthDate && formik.errors.birthDate && (
+              <div className="invalid-feedback">{formik.errors.birthDate}</div>
+            )}
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label">
+              Teléfono:
+            </label>
+            <input
+              type="text"
+              className={`form-control ${
+                formik.touched.phone && formik.errors.phone ? "is-invalid" : ""
+              }`}
+              id="phone"
+              placeholder="Ingresa tu número de teléfono"
+              {...formik.getFieldProps("phone")}
+            />
+            {formik.touched.phone && formik.errors.phone && (
+              <div className="invalid-feedback">{formik.errors.phone}</div>
+            )}
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Contraseña:
+            </label>
+            <input
+              type="password"
+              className={`form-control ${
+                formik.touched.password && formik.errors.password
+                  ? "is-invalid"
+                  : ""
+              }`}
+              id="password"
+              placeholder="Ingresa tu contraseña"
+              {...formik.getFieldProps("password")}
+            />
+            {formik.touched.password && formik.errors.password && (
+              <div className="invalid-feedback">{formik.errors.password}</div>
+            )}
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="confirmPassword" className="form-label">
+              Confirmar contraseña:
+            </label>
+            <input
+              type="password"
+              className={`form-control ${
+                formik.touched.confirmPassword && formik.errors.confirmPassword
+                  ? "is-invalid"
+                  : ""
+              }`}
+              id="confirmPassword"
+              placeholder="Confirma tu contraseña"
+              {...formik.getFieldProps("confirmPassword")}
+            />
+            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+              <div className="invalid-feedback">
+                {formik.errors.confirmPassword}
+              </div>
+            )}
+          </div>
+
+          <button type="submit" className="btn btn-primary btn-block">
+            Registrarse
+          </button>
+        </form>
       </div>
     </div>
   );
