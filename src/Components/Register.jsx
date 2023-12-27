@@ -92,7 +92,7 @@ function Register() {
   return (
     <div>
       <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100">
-        <div className="card p-4 bg-light w-100" style={{ maxWidth: "400px" }}>
+        <div className="card p-4 bg-light w-100" style={{ maxWidth: "400px" }} id="regCard">
           <h3 className="text-center mb-4">Registro</h3>
           <form onSubmit={formik.handleSubmit}>
             {/* Campos del formulario */}

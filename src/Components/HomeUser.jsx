@@ -46,8 +46,11 @@ function HomeUser() {
     <div className="container">
       <div className="row">
         <div className="col">
-          <h1 className="display-4 text-white">
-            Hola {user ? user.fullName : ""}
+          <h1 className="display-4 text-white text-center mt-4" id="userWelcome">
+            ¡Hola {user ? user.fullName : ""}!
+          </h1>
+          <h1 className="display-6 text-white text-center mt-5" id="panel" style={{fontWeight: "bold"}}>
+            Panel de usuario 
           </h1>
         </div>
       </div>
@@ -58,16 +61,16 @@ function HomeUser() {
         />
       )}
       {user && bike && !editingBike && (
-        <div className="row my-4">
-          <div className="col-md-3 col-sm-12">
-            <div className="card bg-dark text-white">
-              <div className="card-body">
-                <h3 className="card-title">Tu bici 🚲</h3>
+        <div className="row my-4 mt-5">
+          <div className="col-md-3 col-sm-12 mx-auto">
+            <div className="card bg-dark text-white mb-5" id="bikeCard">
+              <div className="card-body" id="userCard">
+                <h3 className="card-title mb-3" id="tuBici">Tu bici 🚲</h3>
                 <p className="card-text">Marca: {bike.brand_name}</p>
                 <p className="card-text">Modelo: {bike.model}</p>
                 <p className="card-text">Color: {bike.color}</p>
                 <p className="card-text">Accesorios: {bike.accessories}</p>
-                <button onClick={handleEditBike} className="btn btn-primary">
+                <button onClick={handleEditBike} className="btn btn-primary mt-3" id="modificar">
                   Modificar Bicicleta
                 </button>
               </div>

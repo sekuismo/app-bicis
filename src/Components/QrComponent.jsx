@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import QRCode from 'qrcode.react';
-import axios from 'axios';
-import { SHA256 } from 'crypto-js';
+import React, { useState } from "react";
+import QRCode from "qrcode.react";
+import axios from "axios";
+import { SHA256 } from "crypto-js";
+import bikeImage from "../assets/whiteBike.png";
 
 function QrComponent() {
-  const [qrCodeData, setQRCodeData] = useState('');
+  const [qrCodeData, setQRCodeData] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
 
   const saveQrCode = async (qrCodeString, userId) => {
     try {
-      await axios.post('http://localhost:3000/qrCodes', {
+      await axios.post("http://localhost:3000/qrCodes", {
         userId: userId,
-        qrCodeData: qrCodeString
+        qrCodeData: qrCodeString,
       });
-      console.log('Código QR almacenado en la base de datos.');
+      console.log("Código QR almacenado en la base de datos.");
     } catch (error) {
-      console.error('Error al almacenar el código QR:', error);
+      console.error("Error al almacenar el código QR:", error);
     }
   };
 
@@ -30,7 +31,7 @@ function QrComponent() {
         // Aquí puedes agregar más información relevante
       };
       console.log(userData.token);
-      setUserName(loggedInUser.fullName || '');
+      setUserName(loggedInUser.fullName || "");
 
       const qrCodeString = JSON.stringify(userData);
       setQRCodeData(qrCodeString);
@@ -48,15 +49,28 @@ function QrComponent() {
   return (
     <div>
       <div className="container mx-auto my-auto ">
-        <div className="row mx-auto my-auto">
+        <div className="row mx-auto my-auto mt-5">
           <div className="col text-center">
-            <h1 className="display-3 text-center text-white m-2 mt-4">Guarda tu bicicleta 🚴‍♀️🚴‍♂️</h1>
+            <h1 className="display-3 text-center text-white m-2 mt-1" id="guarda">
+              Guarda tu bicicleta 🚴‍♀️🚴‍♂️
+            </h1>
+          </div>
+        </div>
+        <div className="row mx-auto my-auto mt-1">
+          <div className="col text-center">
+            <div className="img-container">
+              <img src={bikeImage} id="whiteBike" alt="Bicicleta" className="img-fluid" />
+            </div>
           </div>
         </div>
         <div className="row">
           {buttonVisible && (
             <div className="col text-center">
-              <button className="btn btn-primary" style={{ marginTop: "100px", fontSize: "150%" }} onClick={generateQRCode}>
+              <button
+                className="btn btn-primary mt-3"
+                id="generarQR"
+                onClick={generateQRCode}
+              >
                 Generar QR Code
               </button>
             </div>
@@ -70,8 +84,10 @@ function QrComponent() {
         {showMessage && (
           <div className="row">
             <div className="col text-center">
-              <p className='text-white'>Bienvenido/a {userName}</p>
-              <p className='text-white'>Este es tu código QR para ingresar al estacionamiento.</p>
+              <p className="text-white">Bienvenido/a {userName}</p>
+              <p className="text-white">
+                Este es tu código QR para ingresar al estacionamiento.
+              </p>
             </div>
           </div>
         )}

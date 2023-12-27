@@ -40,7 +40,7 @@ function QRReaderComponent() {
       console.warn(err);
     }
   }, []);
-  let user = "Juan Díaz"
+  let user = "Marcial Díaz"
 
   // enviar datos al backend
 
@@ -48,7 +48,7 @@ function QRReaderComponent() {
   return (
     <div>
 
-      <h1 className="text-white text-center display-3 mb-5 mt-4">Bienvenido/a {user}  </h1> 
+      <h1 className="text-white text-center display-3 mb-5 mt-4">Escanear QR  </h1> 
       {scanResult ? (
         <div>
           Success: <a href={"https://" + scanResult}>{scanResult}</a>{" "}

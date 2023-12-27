@@ -7,11 +7,11 @@ function Dashboard2() {
   useEffect(() => {
     // Simulamos datos de ejemplo ya que la API aún no está lista
     const mockData = [
-      { user: 'Juan Pérez', entryTime: '2023-01-01T10:00:00Z', assignedEntryGuard: 'Guardia1'},
-      { user: 'María Gómez', entryTime: '2023-01-01T11:30:00Z', assignedEntryGuard: 'Guardia2'},
-      { user: 'Pedro Rodriguez', entryTime: '2023-01-01T09:15:00Z', assignedEntryGuard: 'Guardia1'},
-      { user: 'Ana Martínez', entryTime: '2023-01-01T14:00:00Z', assignedEntryGuard: 'Guardia2'},
-      { user: 'José Sánchez', entryTime: '2023-01-01T13:45:00Z', assignedEntryGuard: 'Guardia1', },
+      { user: 'Juan Pérez', entryTime: '2023-01-01T10:00:00Z', assignedEntryGuard: 'Ramón Ñuñez'},
+      { user: 'María Gómez', entryTime: '2023-01-01T11:30:00Z', assignedEntryGuard: 'Mario Gomez'},
+      { user: 'Pedro Rodriguez', entryTime: '2023-01-01T09:15:00Z', assignedEntryGuard: 'Ramón Ñuñez'},
+      { user: 'Ana Martínez', entryTime: '2023-01-01T14:00:00Z', assignedEntryGuard: 'Mario Gomez'},
+      { user: 'José Sánchez', entryTime: '2023-01-01T13:45:00Z', assignedEntryGuard: 'Ramón Ñuñez', },
     ];
 
     setParkingData(mockData);

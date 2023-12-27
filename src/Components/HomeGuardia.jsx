@@ -39,13 +39,7 @@ function HomeGuardia() {
 
   return (
     <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        marginTop: "-50px",
-      }}
+      
     >
       <div className="container-fluid">
         <div className="row justify-content-center mt-0">
@@ -118,7 +112,7 @@ function HomeGuardia() {
           </div>
           <div className="col-md-5">
             <div
-              className="card p-4 mt-5"
+              className="card p-4 mt-5 mb-5"
               style={{
                 minWidth: "350px",
                 maxWidth: "500px",
@@ -126,14 +120,12 @@ function HomeGuardia() {
                 color: "white",
               }}
             >
-              <h5 className="text-center mb-6">
+              <h5 className="text-center">
                 Estadísticas de uso del estacionamiento 🤓
               </h5>
               <div
                 className="card p-3 mt-3"
                 style={{
-                  minWidth: "350px",
-                  maxWidth: "500px",
                   backgroundColor: "#2A2248",
                   color: "white",
                 }}
