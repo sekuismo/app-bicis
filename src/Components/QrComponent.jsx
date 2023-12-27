@@ -27,7 +27,7 @@ function QrComponent() {
       const userData = {
         userId: loggedInUser.id,
         token: SHA256(Math.random().toString()).toString().substring(0, 10),
-        // Aquí puedes agregar más información relevante
+        //almacena este token para que después el Usuario Guardia lo corrobore 
       };
       console.log(userData.token);
       setUserName(loggedInUser.fullName || "");
