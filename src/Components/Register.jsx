@@ -90,7 +90,7 @@ function Register() {
           status: true,
         };
 
-        await axios.post("http://107.22.28.154:3333/person-user/", userData);
+        await axios.post("http://54.92.163.60:3333/person-user/", userData);
         console.log("Usuario estudiante registrado con éxito");
         navigate("/login");
       } catch (error) {

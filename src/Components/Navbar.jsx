@@ -21,7 +21,7 @@ function Navbar() {
 
         // Realiza la solicitud de cierre de sesión al servidor
         const response = await axios.get(
-          "http://107.22.28.154:3333/auth/logout",
+          "http://54.92.163.60:3333/auth/logout",
           config
         );
 
