@@ -55,9 +55,7 @@ function HomeAdmin() {
               }}
             >
               <h5 className="text-center mb-2 mt-3">
-                {admin.genero === "M"
-                  ? `¡Bienvenido ${admin.nombre}!`
-                  : `¡Bienvenida ${admin.nombre}!`}
+                {`¡Bienvenid@ al módulo de administración de Bicinacap!`}
               </h5>
               <div
                 className="card p-2 mt-3 mb-3"
@@ -129,7 +127,7 @@ function HomeAdmin() {
                 }}
               >
                 <p className="text-left mb-2 mt-0">
-                  ¡Esta semana *n* personas usaron el estacionamiento! El día de mayor uso fue el miércoles.
+                  ¡Esta semana 21 personas usaron el estacionamiento! El día de mayor uso fue el miércoles.
                 </p>
                 <div
                   className="card p-2 mb-0 mt-3"

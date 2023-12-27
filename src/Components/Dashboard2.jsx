@@ -1,20 +1,43 @@
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 function Dashboard2() {
   const [parkingData, setParkingData] = useState([]);
+  const [parkingSlots, setParkingSlots] = useState(0);
 
   // Aquí deberías hacer la llamada a tu API para obtener los datos
   useEffect(() => {
     // Simulamos datos de ejemplo ya que la API aún no está lista
-    const mockData = [
-      { user: 'Juan Pérez', entryTime: '2023-01-01T10:00:00Z', assignedEntryGuard: 'Ramón Ñuñez'},
-      { user: 'María Gómez', entryTime: '2023-01-01T11:30:00Z', assignedEntryGuard: 'Mario Gomez'},
-      { user: 'Pedro Rodriguez', entryTime: '2023-01-01T09:15:00Z', assignedEntryGuard: 'Ramón Ñuñez'},
-      { user: 'Ana Martínez', entryTime: '2023-01-01T14:00:00Z', assignedEntryGuard: 'Mario Gomez'},
-      { user: 'José Sánchez', entryTime: '2023-01-01T13:45:00Z', assignedEntryGuard: 'Ramón Ñuñez', },
-    ];
+    const getData = async () => {
+      const response = await axios.get("https://54.92.163.60:3333/control/used");
+      const responseParking = await axios.get("https://54.92.163.60:3333/parking-slot/1");
 
-    setParkingData(mockData);
+      const { data, status } = response;
+
+      if (responseParking?.status === 200){
+        if(responseParking?.data?.status === 0 && responseParking?.data?.data !== undefined ){
+          const availableSlots = responseParking?.data?.data?.availableSlots ?? 0;
+          setParkingSlots(availableSlots);
+        }
+      }
+
+      if (status === 200) {
+        if (data.data.length > 0) {
+          const sanitizedData = data.data.map((element) => {
+            return {
+              user: element?.owner?.fullName,
+              bike: `${element?.bike?.brand} ${element?.bike?.model} `,
+              color: element?.bike?.color,
+              assignedGuard: element?.guardControl?.fullName,
+              inDate: element?.inDate,
+            };
+          });
+          setParkingData(sanitizedData);
+        }
+      }
+    }
+
+    getData();
   }, []);
 
   const formatTime = (timestamp) => {
@@ -32,21 +55,25 @@ function Dashboard2() {
         <thead>
           <tr>
             <th>Usuario</th>
+            <th>Bicicleta</th>
+            <th>Color</th>
             <th>Hora de entrada</th>
-            <th>Guardia entrada</th>
+            <th>Guardia control</th>
           </tr>
         </thead>
         <tbody>
           {parkingData.map((entry, index) => (
             <tr key={index}>
-              <td>{entry.user}</td>
-              <td>{formatTime(entry.entryTime)}</td>
-              <td>{entry.assignedEntryGuard}</td>
+            <td>{entry.user}</td>
+            <td>{entry.bike}</td>
+            <td>{entry.color}</td>
+            <td>{formatTime(entry.inDate)}</td>
+            <td>{entry.assignedGuard}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p className='text-white text-end' style={{fontWeight: "bold"}}>Cupos disponibles: {10 - parkingData.length}</p>
+      <p className='text-white text-end' style={{fontWeight: "bold"}}>Cupos disponibles: {parkingSlots}</p>
     </div>
   );
 }

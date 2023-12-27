@@ -103,7 +103,7 @@ function HomeGuardia() {
                     </a>
                   </div>
                   <p className="mt-4">
-                    En este momento hay {cupos} cupos disponibles en el bicicletero
+                    En este momento hay cupos disponibles en el bicicletero
                   </p>
                 </div>
               </div>
@@ -131,8 +131,7 @@ function HomeGuardia() {
                 }}
               >
                 <p className="text-left mb-2 mt-0">
-                  ¡Esta semana {personas} personas usaron el estacionamiento! El día de
-                  mayor uso fue el {dia}.
+                ¡Esta semana 21 personas usaron el estacionamiento! El día de mayor uso fue el miércoles.
                 </p>
                 <div
                   className="card p-2 mb-0 mt-3"
