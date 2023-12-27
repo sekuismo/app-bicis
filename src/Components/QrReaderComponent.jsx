@@ -4,11 +4,12 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 
 function QRReaderComponent() {
   const [scanResult, setScanResult] = useState(null);
+  const [bikeControl, setBikeControl] = useState({});
   const [user, setUser] = useState("Juan Díaz"); // Asumiendo que 'user' pueda cambiar.
 
   const qrValidator = async (qrData) => {
     try {
-      const response = await axios.post('http://localhost:3000/control', qrData);
+      const response = await axios.post('https://54.92.163.60:3333/control/scan', qrData);
       console.log('Respuesta del backend:', response.data);
       alert('Datos del QR enviados con éxito');
     } catch (error) {
@@ -19,6 +20,7 @@ function QRReaderComponent() {
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
+      facingMode: 'environment',
       qrbox: { width: 250, height: 250 },
       fps: 10,
     });
