@@ -48,7 +48,7 @@ function Login() {
     try {
       const response = await axios.post("http://107.22.28.154:3333/auth/login", {
         email,
-        password
+        passwrd: password // Aquí se cambia la propiedad a "passwrd"
       });
       const userData = response.data;
 
