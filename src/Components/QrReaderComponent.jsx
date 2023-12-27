@@ -9,9 +9,24 @@ function QRReaderComponent() {
 
   const qrValidator = async (qrData) => {
     try {
-      const response = await axios.post('https://54.92.163.60:3333/control/scan', qrData);
-      console.log('Respuesta del backend:', response.data);
-      alert('Datos del QR enviados con éxito');
+      const loggedInUser = localStorage.getItem("user");
+      if (loggedInUser) {
+        const userData = JSON.parse(loggedInUser);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userData.authData.token}`,
+          },
+        };
+        const response = await axios.post('https://54.92.163.60:3333/control/scan', qrData, config);
+
+        console.log('Respuesta del backend:', response.data);
+        alert('Datos del QR enviados con éxito'); 
+      } else {
+        const response = await axios.post('https://54.92.163.60:3333/control/scan', qrData);
+
+        console.log('Respuesta del backend:', response.data);
+        alert('Datos del QR enviados'); 
+      }
     } catch (error) {
       console.error('Error al enviar datos al backend:', error);
       alert('Error al enviar datos del QR');
