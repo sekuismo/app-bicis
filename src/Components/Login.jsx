@@ -46,7 +46,7 @@ function Login() {
   const handleLogin = async (values, { setSubmitting }) => {
     const { email, password } = values;
     try {
-      const response = await axios.post("http://54.92.163.60:3333/auth/login", {
+      const response = await axios.post("https://54.92.163.60:3333/auth/login", {
         email,
         passwrd: password // Aquí se cambia la propiedad a "passwrd"
       });

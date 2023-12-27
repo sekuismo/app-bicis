@@ -1,11 +1,13 @@
-import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 
 function Register() {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('')
 
   function validarRUT(rut) {
     // Eliminar puntos y guión
@@ -90,11 +92,15 @@ function Register() {
           status: true,
         };
 
-        await axios.post("http://54.92.163.60:3333/person-user/", userData);
+        await axios.post("https://54.92.163.60:3333/person-user/", userData);
         console.log("Usuario estudiante registrado con éxito");
         navigate("/login");
       } catch (error) {
-        console.error("Error al registrar el usuario:", error);
+        let errorMsg = "Error al registrar el usuario";
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMsg = error.response.data.message;
+        }
+        setErrorMessage(errorMsg);
       }
     },
   });
@@ -110,9 +116,8 @@ function Register() {
             </label>
             <input
               type="email"
-              className={`form-control ${
-                formik.touched.email && formik.errors.email ? "is-invalid" : ""
-              }`}
+              className={`form-control ${formik.touched.email && formik.errors.email ? "is-invalid" : ""
+                }`}
               id="email"
               placeholder="Ingresa tu dirección de correo electrónico"
               {...formik.getFieldProps("email")}
@@ -128,9 +133,8 @@ function Register() {
             </label>
             <input
               type="text"
-              className={`form-control ${
-                formik.touched.name && formik.errors.name ? "is-invalid" : ""
-              }`}
+              className={`form-control ${formik.touched.name && formik.errors.name ? "is-invalid" : ""
+                }`}
               id="name"
               placeholder="Ingresa tu nombre"
               {...formik.getFieldProps("name")}
@@ -146,11 +150,10 @@ function Register() {
             </label>
             <input
               type="text"
-              className={`form-control ${
-                formik.touched.lastName && formik.errors.lastName
-                  ? "is-invalid"
-                  : ""
-              }`}
+              className={`form-control ${formik.touched.lastName && formik.errors.lastName
+                ? "is-invalid"
+                : ""
+                }`}
               id="lastName"
               placeholder="Ingresa tu apellido"
               {...formik.getFieldProps("lastName")}
@@ -166,9 +169,8 @@ function Register() {
             </label>
             <input
               type="text"
-              className={`form-control ${
-                formik.touched.rut && formik.errors.rut ? "is-invalid" : ""
-              }`}
+              className={`form-control ${formik.touched.rut && formik.errors.rut ? "is-invalid" : ""
+                }`}
               id="rut"
               placeholder="Ingresa tu RUT"
               {...formik.getFieldProps("rut")}
@@ -184,11 +186,10 @@ function Register() {
             </label>
             <input
               type="text"
-              className={`form-control ${
-                formik.touched.birthDate && formik.errors.birthDate
-                  ? "is-invalid"
-                  : ""
-              }`}
+              className={`form-control ${formik.touched.birthDate && formik.errors.birthDate
+                ? "is-invalid"
+                : ""
+                }`}
               id="birthDate"
               placeholder="DD/MM/AAAA"
               {...formik.getFieldProps("birthDate")}
@@ -204,9 +205,8 @@ function Register() {
             </label>
             <input
               type="text"
-              className={`form-control ${
-                formik.touched.phone && formik.errors.phone ? "is-invalid" : ""
-              }`}
+              className={`form-control ${formik.touched.phone && formik.errors.phone ? "is-invalid" : ""
+                }`}
               id="phone"
               placeholder="Ingresa tu número de teléfono"
               {...formik.getFieldProps("phone")}
@@ -222,11 +222,10 @@ function Register() {
             </label>
             <input
               type="password"
-              className={`form-control ${
-                formik.touched.password && formik.errors.password
-                  ? "is-invalid"
-                  : ""
-              }`}
+              className={`form-control ${formik.touched.password && formik.errors.password
+                ? "is-invalid"
+                : ""
+                }`}
               id="password"
               placeholder="Ingresa tu contraseña"
               {...formik.getFieldProps("password")}
@@ -242,11 +241,10 @@ function Register() {
             </label>
             <input
               type="password"
-              className={`form-control ${
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-                  ? "is-invalid"
-                  : ""
-              }`}
+              className={`form-control ${formik.touched.confirmPassword && formik.errors.confirmPassword
+                ? "is-invalid"
+                : ""
+                }`}
               id="confirmPassword"
               placeholder="Confirma tu contraseña"
               {...formik.getFieldProps("confirmPassword")}
@@ -257,7 +255,11 @@ function Register() {
               </div>
             )}
           </div>
-
+          {errorMessage && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
+            </div>
+          )}
           <button type="submit" className="btn btn-primary btn-block">
             Registrarse
           </button>

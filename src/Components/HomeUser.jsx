@@ -24,7 +24,7 @@ function HomeUser() {
   }, [navigate]);
 
   const submitBikeForm = (bikeData) => {
-    let url = `http://54.92.163.60:3333/bike/`;
+    let url = `https://54.92.163.60:3333/bike/`;
     let method = 'post';
 
     // Si estamos editando una bicicleta existente, añadimos el ID al cuerpo de la solicitud
